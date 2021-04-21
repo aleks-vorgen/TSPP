@@ -24,5 +24,11 @@ namespace TSPP
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Autorization autorization = new Autorization();
+            autorization.Show();
+        }
     }
 }

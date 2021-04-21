@@ -23,5 +23,11 @@ namespace TSPP
         {
             InitializeComponent();
         }
+
+        private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
     }
 }
