@@ -7,17 +7,5 @@
         xmlns:local="clr-namespace:TSPP"
         mc:Ignorable="d"
         Title="University" Height="450" Width="894">
-    <Grid Margin="0,0,82,0">
-        <DataGrid x:Name="List" Height="419" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding Mode=OneWay}" SelectionChanged="List_SelectionChanged" Margin="240,0,-76,0" HorizontalAlignment="Left" Width="645">
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Фамилия"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Название кафедры"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Год рождения"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Год устройства на работу"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Должность"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Звание"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Пенсионный стаж"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+    <Grid Margin="0,0,82,0"/>
 </Window>

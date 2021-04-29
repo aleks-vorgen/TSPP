@@ -21,13 +21,30 @@ namespace TSPP
     {
         public Autorization()
         {
-            InitializeComponent();
+            //InitializeComponent();
+        }
+
+        const string login = "it91";
+        const string password = "it-91";
+
+        private void AutorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(LogInField.Text != login && PasswordField.Password != password)
+            {
+                MessageBox.Show("Логин или пароль не верный");
+            }
+            else
+            {
+                
+                MainWindow mainWindow = new MainWindow();
+                this.Hide();    //закрыть форму авторизации
+                mainWindow.Show();  //Показать InfoForm
+            }
         }
 
         private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
     }
 }
