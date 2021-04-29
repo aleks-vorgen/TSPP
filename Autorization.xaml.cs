@@ -19,32 +19,28 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
+
+        static string login = "it-91";
+        static string password = "it-91";
+
         public Autorization()
         {
-            //InitializeComponent();
-        }
-
-        const string login = "it91";
-        const string password = "it-91";
-
-        private void AutorizationButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(LogInField.Text != login && PasswordField.Password != password)
-            {
-                MessageBox.Show("Логин или пароль не верный");
-            }
-            else
-            {
-                
-                MainWindow mainWindow = new MainWindow();
-                this.Hide();    //закрыть форму авторизации
-                mainWindow.Show();  //Показать InfoForm
-            }
+            InitializeComponent();
         }
 
         private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void AutorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LogInField.Text == login && PasswordField.Password == password)
+            {
+                InfoForm InfoForm = new InfoForm();
+                this.Hide();
+                InfoForm.Show();
+            }
         }
     }
 }
