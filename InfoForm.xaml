@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="InfoForm" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Label" HorizontalAlignment="Left" Margin="188,130,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
