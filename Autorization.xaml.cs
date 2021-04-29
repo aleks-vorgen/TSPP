@@ -40,6 +40,11 @@ namespace TSPP
                 InfoForm InfoForm = new InfoForm();
                 this.Hide();
                 InfoForm.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Неверные данные");
             }
         }
     }
