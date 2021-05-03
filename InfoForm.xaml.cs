@@ -29,5 +29,16 @@ namespace TSPP
             Autorization autorization = new Autorization();
             autorization.Show();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            TSPP.Database1DataSet database1DataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
+            // Загрузить данные в таблицу EmployeesList. Можно изменить этот код как требуется.
+            TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter = new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
+            database1DataSetEmployeesListTableAdapter.Fill(database1DataSet.EmployeesList);
+            System.Windows.Data.CollectionViewSource employeesListViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
+            employeesListViewSource.View.MoveCurrentToFirst();
+        }
     }
 }
