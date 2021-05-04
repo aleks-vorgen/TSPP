@@ -17,8 +17,8 @@
                 <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="Год рождения" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="was_hired_yearColumn" Binding="{Binding was_hired_year}" Header="Нанят" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="position" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="rank" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="Звание" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="Должность" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="retirement_expColumn" Binding="{Binding retirement_exp}" Header="Пенсионный стаж" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="Кафедра" Width="SizeToHeader"/>
             </DataGrid.Columns>
