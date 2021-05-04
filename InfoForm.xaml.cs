@@ -24,14 +24,6 @@ namespace TSPP
             InitializeComponent();
         }
 
-<<<<<<< HEAD
-=======
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Autorization autorization = new Autorization();
-            autorization.Show();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -42,6 +34,5 @@ namespace TSPP
             System.Windows.Data.CollectionViewSource employeesListViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
             employeesListViewSource.View.MoveCurrentToFirst();
         }
->>>>>>> 999fbb7b3e09a61ba3a14cf68eec94b215afa21a
     }
 }
