@@ -5,6 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TSPP"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="InfoForm" Height="450" Width="800">
     <Grid/>
+=======
+        Title="InfoForm" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:Database1DataSet x:Key="database1DataSet"/>
+        <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource employeesListViewSource}">
+        <DataGrid x:Name="employeesListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="270,70,29,73" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="surname" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="birth year" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="was_hired_yearColumn" Binding="{Binding was_hired_year}" Header="was hired year" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="position" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="rank" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="retirement_expColumn" Binding="{Binding retirement_exp}" Header="retirement exp" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="cathedra name" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+>>>>>>> 999fbb7b3e09a61ba3a14cf68eec94b215afa21a
 </Window>
