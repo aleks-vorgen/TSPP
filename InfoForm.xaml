@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TSPP"
         mc:Ignorable="d"
-        Title="InfoForm" Height="450" Width="1000" Loaded="Window_Loaded">
+        Title="InfoForm" Height="450" Width="860" Loaded="Window_Loaded">
     <Window.Resources>
         <local:Database1DataSet x:Key="database1DataSet"/>
         <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
@@ -13,10 +13,14 @@
     <Grid DataContext="{StaticResource employeesListViewSource}">
         <DataGrid x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="236,25,131,55" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="Год рождения" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="was_hired_yearColumn" Binding="{Binding was_hired_year}" Header="Нанят" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="Звание" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="Должность" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="retirement_expColumn" Binding="{Binding retirement_exp}" Header="Пенсионный стаж" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="Кафедра" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="AddInfo" Content="+" HorizontalAlignment="Left" Margin="180,80,0,0" VerticalAlignment="Top" Width="20"/>
-        <Button x:Name="DeleteInfo" Content="-" HorizontalAlignment="Left" Margin="180,120,0,0" VerticalAlignment="Top" Width="20"/>
-        <Button x:Name="EditInfo" Content="✎" HorizontalAlignment="Left" Margin="180,160,0,0" VerticalAlignment="Top" Width="20"/>
     </Grid>
 </Window>

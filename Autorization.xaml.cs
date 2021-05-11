@@ -54,19 +54,6 @@ namespace TSPP
 
         private void AutorizationButton_Click(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
-            if (LogInField.Text == login && PasswordField.Password == password)
-            {
-                InfoForm InfoForm = new InfoForm();
-                this.Hide();
-                InfoForm.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Неверные данные", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-=======
             AuthenticateUser(LogInField.Text, PasswordField.Password);
 
             //if (LogInField.Text == login && PasswordField.Password == password)
@@ -76,7 +63,6 @@ namespace TSPP
             //    InfoForm.Show();
                 
             //}
->>>>>>> 38fdfe645e2b7ad7455f095500b2932a19fb4218
         }
     }
 }
