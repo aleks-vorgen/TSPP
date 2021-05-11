@@ -19,13 +19,22 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        private static string login;
-        private static string password;
+        private static string login = "admin";
+        private static string password = "password";
 
         private bool AuthenticateUser(string username, string password)
         {
+            TSPP.Database1DataSet dataset = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
+            TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter adapter =
+                new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
+            Database1DataSet.UserListDataTable table = (Database1DataSet.UserListDataTable)dataset.Tables["UserList"];
+            TSPP.Database1DataSet.UserListRow[] foundRows;
+            foundRows = (Database1DataSet.UserListRow[])table.Select();
+            TSPP.Database1DataSet.UserListRow[] query1 = (Database1DataSet.UserListRow[])dataset.UserList.Select();
+            TSPP.Database1DataSet.UserListRow[] query2 = (Database1DataSet.UserListRow[])dataset.UserList.Select($"username = {login}");
+            //Всегда будет возвращать 1 строку, но так как это частный случай, то кастим тип
+            TSPP.Database1DataSet.UserListRow line = query1[0]; //и берём первое значение из массива (и единственное)
             string usrnm, pass;
-            string commandString = $"SELECT username, password FROM EmployeeList WHERE username={login};";
 
             TSPP.Database1DataSet.UserListDataTable data_table = new TSPP.Database1DataSet.UserListDataTable();
             try
