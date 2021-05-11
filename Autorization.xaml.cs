@@ -11,8 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MySql.Data;
-using MySql.Data.MySqlClient;
 
 namespace TSPP
 {
@@ -21,22 +19,18 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        static string login;
-        static string password;
+        private static string login;
+        private static string password;
 
         private bool AuthenticateUser(string username, string password)
         {
-            
-            MySqlCommand command = new MySqlCommand();
             string usrnm, pass;
             string commandString = $"SELECT username, password FROM EmployeeList WHERE username={login};";
-            MySqlDataReader reader;
+
             TSPP.Database1DataSet.UserListDataTable data_table = new TSPP.Database1DataSet.UserListDataTable();
             try
             {
-                command.Connection.Open();
-                reader = command.ExecuteReader();
-                reader.Read();
+                
                 
             }
             catch (Exception)
