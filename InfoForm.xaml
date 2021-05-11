@@ -22,5 +22,6 @@
                 <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="Кафедра" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="ShowEmployeeForm_Button" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="180,60,0,0" Click="ShowEmployeeForm_Button_Click"/>
     </Grid>
 </Window>

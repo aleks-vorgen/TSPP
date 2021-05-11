@@ -19,8 +19,8 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        private static string login;
-        private static string password;
+        private static string login = "1";
+        private static string password = "1";
 
         private bool AuthenticateUser(string username, string password)
         {
@@ -54,15 +54,15 @@ namespace TSPP
 
         private void AutorizationButton_Click(object sender, RoutedEventArgs e)
         {
-            AuthenticateUser(LogInField.Text, PasswordField.Password);
+            //AuthenticateUser(LogInField.Text, PasswordField.Password);
 
-            //if (LogInField.Text == login && PasswordField.Password == password)
-            //{
-            //    InfoForm InfoForm = new InfoForm();
-            //    this.Close();
-            //    InfoForm.Show();
-                
-            //}
+            if (LogInField.Text == login && PasswordField.Password == password)
+            {
+                InfoForm InfoForm = new InfoForm();
+                this.Close();
+                InfoForm.Show();
+              
+            }
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿<Window x:Class="TSPP.AddInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TSPP"
+        mc:Ignorable="d"
+        Title="AddInfo" Height="450" Width="320" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" IsTabStop="True" WindowStyle="None">
+    <Grid>
+        <TextBox x:Name="Surname_textBox" Height="20" Margin="80,80,80,350" TextWrapping="Wrap" Text="Фамилия" UndoLimit="40"/>
+        <TextBox x:Name="Cathedra_textBox" Margin="80,120,80,310" TextWrapping="Wrap" Text="Кафедра" Height="20" UndoLimit="40"/>
+        <TextBox x:Name="Birth_TextBox" Height="20" Margin="80,160,80,270" TextWrapping="Wrap" Text="Год рождения" UndoLimit="4"/>
+        <TextBox x:Name="WasHired_TextBox" Height="20" Margin="80,200,80,230" TextWrapping="Wrap" Text="Год трудоустройства" UndoLimit="4"/>
+        <TextBox x:Name="Rank_TextBox" Height="20" Margin="80,240,80,190" TextWrapping="Wrap" Text="Должность" UndoLimit="40"/>
+        <ComboBox x:Name="Position_ComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Margin="80,280,0,0" Height="20" ToolTip="Выберите звание сотрудника">
+            <ComboBoxItem Content="Доцент"/>
+            <ComboBoxItem Content="Старший исследователь"/>
+            <ComboBoxItem Content="Профессор"/>
+        </ComboBox>
+        <Button x:Name="AddInfo_Button" Content="Добавить" HorizontalAlignment="Left" Margin="80,340,0,0" VerticalAlignment="Top" Width="160" Height="40" Click="AddInfo_Button_Click"/>
+        <Button x:Name="AddInfo_ClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="80,400,0,0" VerticalAlignment="Top" Width="75" Click="AddInfo_ClearButton_Click"/>
+        <Button x:Name="AddInfo_CancleButton" Content="Отмена" HorizontalAlignment="Left" Margin="165,400,0,0" VerticalAlignment="Top" Width="75" Click="AddInfo_CancleButton_Click"/>
+        <GridSplitter HorizontalAlignment="Stretch" Margin="0,-100,0,230" Width="5" RenderTransformOrigin="0.5,0.5" Height="320" Focusable="False" IsTabStop="False" Cursor="Arrow">
+            <GridSplitter.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </GridSplitter.RenderTransform>
+        </GridSplitter>
+        <TextBlock TextWrapping="Wrap" Text="Добавление сотрудника" Margin="10,20,10,410" Width="300" TextAlignment="Center" LineHeight="24"/>
+        <GridSplitter HorizontalAlignment="Stretch" Height="314" Margin="0,160,0,-30" Width="5" RenderTransformOrigin="0.5,0.5" Focusable="False" IsTabStop="False" Cursor="Arrow">
+            <GridSplitter.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </GridSplitter.RenderTransform>
+        </GridSplitter>
+        
+
+    </Grid>
+</Window>

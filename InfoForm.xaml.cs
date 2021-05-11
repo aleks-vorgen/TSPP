@@ -36,5 +36,11 @@ namespace TSPP
             employeesListViewSource.View.MoveCurrentToFirst();
             //database1DataSetEmployeesListTableAdapter.Adapter.SelectCommand.       
         }
+
+        private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddInfo addInfoForm = new AddInfo();
+            addInfoForm.Show();
+        }
     }
 }
