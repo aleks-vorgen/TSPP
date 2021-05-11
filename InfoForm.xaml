@@ -11,16 +11,8 @@
         <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource employeesListViewSource}">
-        <DataGrid x:Name="employeesListDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="270,50,0,30" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True">
+        <DataGrid x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="236,25,131,55" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="*"/>
-                <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="Год рождения" Width="*"/>
-                <DataGridTextColumn x:Name="was_hired_yearColumn" Binding="{Binding was_hired_year}" Header="Нанят" Width="*"/>
-                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="Звание" Width="*"/>
-                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="Должность" Width="*"/>
-                <DataGridTextColumn x:Name="retirement_expColumn" Binding="{Binding retirement_exp}" Header="Пенсионный стаж" Width="*"/>
-                <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="Кафедра" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="AddInfo" Content="+" HorizontalAlignment="Left" Margin="180,80,0,0" VerticalAlignment="Top" Width="20"/>
