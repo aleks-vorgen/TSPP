@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using TSPP.DB;
+using System.Data.SqlClient;
+using System.Data;
 namespace TSPP
 {
     /// <summary>
@@ -24,19 +26,10 @@ namespace TSPP
 
         private bool AuthenticateUser(string username, string password)
         {
-            TSPP.Database1DataSet dataset = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
-            TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter adapter =
-                new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
-            Database1DataSet.UserListDataTable table = (Database1DataSet.UserListDataTable)dataset.Tables["UserList"];
-            TSPP.Database1DataSet.UserListRow[] foundRows;
-            foundRows = (Database1DataSet.UserListRow[])table.Select();
-            TSPP.Database1DataSet.UserListRow[] query1 = (Database1DataSet.UserListRow[])dataset.UserList.Select();
-            TSPP.Database1DataSet.UserListRow[] query2 = (Database1DataSet.UserListRow[])dataset.UserList.Select($"username = {login}");
-            //Всегда будет возвращать 1 строку, но так как это частный случай, то кастим тип
-            TSPP.Database1DataSet.UserListRow line = query1[0]; //и берём первое значение из массива (и единственное)
-            string usrnm, pass;
+            string query = "";
+            DB.DB.SelectQuery(query);
 
-            TSPP.Database1DataSet.UserListDataTable data_table = new TSPP.Database1DataSet.UserListDataTable();
+            
             try
             {
                 

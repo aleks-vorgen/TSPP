@@ -1403,7 +1403,7 @@ SELECT Id, surname, birth_year, was_hired_year, position, rank, retirement_exp, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::TSPP.Properties.Settings.Default.Database1ConnectionString;
+            this._connection.ConnectionString = global::TSPP.Properties.Settings.Default.constr;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1853,7 +1853,7 @@ SELECT Id, username, password, is_worker FROM UserList WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::TSPP.Properties.Settings.Default.Database1ConnectionString;
+            this._connection.ConnectionString = global::TSPP.Properties.Settings.Default.constr;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
