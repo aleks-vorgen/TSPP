@@ -19,50 +19,6 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        private static string login = "1";
-        private static string password = "1";
-
-        private bool AuthenticateUser(string username, string password)
-        {
-            string usrnm, pass;
-            string commandString = $"SELECT username, password FROM EmployeeList WHERE username={login};";
-
-            TSPP.Database1DataSet.UserListDataTable data_table = new TSPP.Database1DataSet.UserListDataTable();
-            try
-            {
-                
-                
-            }
-            catch (Exception)
-            {
-
-
-
-            }
-
-            return true;
-        }
-        public Autorization()
-        {
-            InitializeComponent();
-        }
-
-        private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void AutorizationButton_Click(object sender, RoutedEventArgs e)
-        {
-            //AuthenticateUser(LogInField.Text, PasswordField.Password);
-
-            if (LogInField.Text == login && PasswordField.Password == password)
-            {
-                InfoForm InfoForm = new InfoForm();
-                this.Close();
-                InfoForm.Show();
-              
-            }
-        }
+        
     }
 }
