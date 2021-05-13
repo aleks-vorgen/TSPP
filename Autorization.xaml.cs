@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using TSPP.DB;
+using System.Data.SqlClient;
+using System.Data;
+using System.Drawing;
 namespace TSPP
 {
     /// <summary>
@@ -19,6 +22,5 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        
     }
 }
