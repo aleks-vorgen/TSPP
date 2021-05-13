@@ -22,9 +22,6 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        private static string login = "admin";
-        private static string password = "password";
-
         private bool AuthenticateUser(string username, string password)
         {
             bool was_username_found=false;
@@ -52,8 +49,9 @@ namespace TSPP
                 }
             } catch (Exception)
             {
+                AlertBox.Content = "Произошла непредвиденная ошибка";
+                AlertBox.Visibility = System.Windows.Visibility.Visible;
             }
-
 
             return true;
         }
@@ -71,14 +69,6 @@ namespace TSPP
         private void AutorizationButton_Click(object sender, RoutedEventArgs e)
         {
             AuthenticateUser(LogInField.Text, PasswordField.Password);
-
-            //if (LogInField.Text == login && PasswordField.Password == password)
-            //{
-            //    InfoForm InfoForm = new InfoForm();
-            //    this.Close();
-            //    InfoForm.Show();
-
-            //}
         }
     }
 }
