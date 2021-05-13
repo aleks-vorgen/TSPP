@@ -22,5 +22,57 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
+<<<<<<< HEAD
+=======
+        private bool AuthenticateUser(string username, string password)
+        {
+            bool was_username_found=false;
+            string query = $"SELECT password, is_worker FROM [UserList] WHERE [username] = '{username}'";
+            try
+            {
+                SqlDataReader reader = TSPP.DB.DB.GetReaderForQuery(query);
+                string password_from_db="";
+
+                while (reader.Read())
+                {
+                    was_username_found = true;
+                    password_from_db = reader.GetString(0);
+                }
+                if (!was_username_found)
+                {
+                    
+                    AlertBox.Content = "Пользователя с таким именем не существует";
+                    AlertBox.Visibility = System.Windows.Visibility.Visible;
+                    LogInField.BorderBrush = Brushes.Red;
+                }
+                else if (password_from_db != password)
+                {
+                    AlertBox.Content = "Пароль не совпадает";
+                    AlertBox.Visibility = System.Windows.Visibility.Visible;
+                }
+            } catch (Exception)
+            {
+                AlertBox.Content = "Произошла непредвиденная ошибка";
+                AlertBox.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            return true;
+        }
+        public Autorization()
+        {
+            InitializeComponent();
+            AlertBox.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LogInField.BorderBrush = Brushes.Black;
+        }
+
+        private void AutorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            AuthenticateUser(LogInField.Text, PasswordField.Password);
+        }
+>>>>>>> origin/pog
     }
 }
