@@ -30,6 +30,7 @@ namespace TSPP
             {
                 SqlDataReader reader = TSPP.DB.DB.GetReaderForQuery(query);
                 string password_from_db="";
+
                 while (reader.Read())
                 {
                     was_username_found = true;
@@ -38,7 +39,7 @@ namespace TSPP
                 if (!was_username_found)
                 {
                     
-                    AlertBox.Content = "Пользователя с таким именем нет";
+                    AlertBox.Content = "Пользователя с таким именем не существует";
                     AlertBox.Visibility = System.Windows.Visibility.Visible;
                     LogInField.BorderBrush = Brushes.Red;
                 }
