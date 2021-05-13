@@ -15,5 +15,6 @@
         <TextBox x:Name="LogInField" Height="20" TextWrapping="Wrap" Width="140" Margin="80,140,80,260" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" CaretBrush="Black" TextChanged="LogInField_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,124,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" Width="40"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,237,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
+        <Label x:Name="AlertBox" Content="Пользователь с такими данными&#xD;&#xA;не существует" HorizontalAlignment="Left" Height="61" Margin="50,30,0,0" VerticalAlignment="Top" Width="200" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>
