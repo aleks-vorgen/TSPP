@@ -31,5 +31,22 @@ namespace TSPP.DB
             SqlConnection cn_connection = new SqlConnection(cn_String);
             if (cn_connection.State != ConnectionState.Closed) cn_connection.Close();
         }
+        public static void InsertEmployee(string surname, uint birth_year, uint was_hired_year, string position,
+            string rank, uint retirement_exp, string cathedra_name)
+        {
+            SqlConnection connection = Connect();
+            string query = "INSERT INTO [EmployeeList] ([surname], [birth_year], [was_hired_year], [position], [rank], "
+                + $"[retirement_exp], [carthedra_name] VALUES ({surname}, {birth_year},{was_hired_year}, {position}, {rank}, {retirement_exp}, {cathedra_name})";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
+        public static void AddUser(string username, string password, bool is_worker)
+        {
+            SqlConnection connection = Connect();
+            string query = "INSERT INTO [UserList] ([username], [password], [is_worker]"
+                + $" VALUES ({username}, {password},{is_worker}";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
     }
 }

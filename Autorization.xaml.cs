@@ -22,15 +22,14 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
-        private bool AuthenticateUser(string username, string password)
+        private string GetPassword(string username)
         {
             bool was_username_found = false;
             string query = $"SELECT password, is_worker FROM [UserList] WHERE [username] = '{username}'";
+            string password_from_db = "";
             try
             {
                 SqlDataReader reader = TSPP.DB.DB.GetReaderForQuery(query);
-                string password_from_db = "";
-
                 while (reader.Read())
                 {
                     was_username_found = true;
@@ -39,39 +38,30 @@ namespace TSPP
                 }
                 if (!was_username_found)
                 {
-
                     AlertBox.Content = "Пользователя с таким именем не существует";
                     AlertBox.Visibility = System.Windows.Visibility.Visible;
                     LogInField.BorderBrush = Brushes.Red;
+                    return null;
                 }
-                else if (password_from_db != password)
-                {
-                    AlertBox.Content = "Пароль не совпадает";
-                    AlertBox.Visibility = System.Windows.Visibility.Visible;
-                } else
-                {
-                    InfoForm infoForm = new InfoForm();
-                    infoForm.Show();
-                    this.Close();
-                    
-                }
-<<<<<<< HEAD
-=======
-                else
-                {
-                    InfoForm InfoForm = new InfoForm();
-                    InfoForm.Show();
-                    this.Close();
-                }
->>>>>>> origin/alexus
             }
             catch (Exception)
             {
                 AlertBox.Content = "Произошла непредвиденная ошибка";
                 AlertBox.Visibility = System.Windows.Visibility.Visible;
             }
+            return password_from_db;
+        }
+        private void AuthenticateUser(string username, string password)
+        {
+            string password_from_db = GetPassword(username);
+            if (password != password_from_db)
+            {
+                AlertBox.Content = "Пароль не совпадает";
+                AlertBox.Visibility = System.Windows.Visibility.Visible;
+            }
 
-            return true;
+
+
         }
         public Autorization()
         {
