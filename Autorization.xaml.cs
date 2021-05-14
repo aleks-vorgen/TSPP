@@ -55,6 +55,15 @@ namespace TSPP
                     this.Close();
                     
                 }
+<<<<<<< HEAD
+=======
+                else
+                {
+                    InfoForm InfoForm = new InfoForm();
+                    InfoForm.Show();
+                    this.Close();
+                }
+>>>>>>> origin/alexus
             }
             catch (Exception)
             {
