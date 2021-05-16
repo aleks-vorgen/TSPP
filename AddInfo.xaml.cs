@@ -20,8 +20,7 @@ namespace TSPP
     /// </summary>
     public partial class AddInfo : Window
     {
-        private static bool all_valid = false;
-        private static readonly TextBox[] textBoxList;
+        private static Dictionary<string, bool> validity = new Dictionary<string, bool>(6);
 
         public AddInfo()
         {

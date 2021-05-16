@@ -48,7 +48,7 @@ namespace TSPP
         {
             if (System.Windows.Forms.MessageBox.Show(
                 "Закрыть приложение?",
-                "",
+                "Unoversity",
                 MessageBoxButtons.YesNo)
                 == System.Windows.Forms.DialogResult.No)
             {
