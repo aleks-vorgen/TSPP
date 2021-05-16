@@ -48,6 +48,7 @@ namespace TSPP
             {
                 AlertBox.Content = "Произошла непредвиденная ошибка";
                 AlertBox.Visibility = System.Windows.Visibility.Visible;
+                return null;
             }
             return password_from_db;
         }
@@ -59,14 +60,19 @@ namespace TSPP
                 AlertBox.Content = "Пароль не совпадает";
                 AlertBox.Visibility = System.Windows.Visibility.Visible;
             }
-
-
+            else
+            {
+                InfoForm infoForm = new InfoForm();
+                this.Close();
+                infoForm.Show();
+            }
 
         }
         public Autorization()
         {
             InitializeComponent();
             AlertBox.Visibility = System.Windows.Visibility.Hidden;
+            LogInField.Focus();
         }
 
         private void LogInField_TextChanged(object sender, TextChangedEventArgs e)
@@ -76,7 +82,15 @@ namespace TSPP
 
         private void AutorizationButton_Click(object sender, RoutedEventArgs e)
         {
-            AuthenticateUser(LogInField.Text, PasswordField.Password);
+            AuthenticateUser(LogInField.Text.Trim(), PasswordField.Password.Trim());
+        }
+
+        private void PasswordField_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                AuthenticateUser(LogInField.Text.Trim(), PasswordField.Password.Trim());
+            }
         }
     }
 }

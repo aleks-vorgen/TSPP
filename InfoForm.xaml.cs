@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -41,6 +42,20 @@ namespace TSPP
         {
             AddInfo addInfoForm = new AddInfo();
             addInfoForm.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (System.Windows.Forms.MessageBox.Show(
+                "Закрыть приложение?",
+                "",
+                MessageBoxButtons.YesNo)
+                == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
+            Environment.Exit(1);
         }
     }
 }
