@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="AddInfo" Height="450" Width="320" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" IsTabStop="True" WindowStyle="None">
     <Grid>
-        <TextBox x:Name="Surname_textBox" Height="20" Margin="80,80,80,350" TextWrapping="Wrap" Text="Фамилия" UndoLimit="40" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="Cathedra_textBox" Margin="80,120,80,310" TextWrapping="Wrap" Text="Кафедра" Height="20" UndoLimit="40" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="Birth_TextBox" Height="20" Margin="80,160,80,270" TextWrapping="Wrap" Text="Год рождения" UndoLimit="4" GotFocus="ClearOnClickIfDefault" TextChanged="CheckIfNumbers" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="WasHired_TextBox" Height="20" Margin="80,200,80,230" TextWrapping="Wrap" Text="Год трудоустройства" UndoLimit="4" GotFocus="ClearOnClickIfDefault" TextChanged="CheckIfNumbers" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="Rank_TextBox" Height="20" Margin="80,240,80,190" TextWrapping="Wrap" Text="Должность" UndoLimit="40" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
-        <ComboBox x:Name="Position_ComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Margin="80,280,0,0" Height="20" ToolTip="Выберите звание сотрудника">
+        <TextBox x:Name="Surname_textBox" Height="20" Margin="80,80,80,350" TextWrapping="Wrap" Text="Фамилия" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="Cathedra_textBox" Margin="80,120,80,310" TextWrapping="Wrap" Text="Кафедра" Height="20" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="Birth_TextBox" Height="20" Margin="80,160,80,270" TextWrapping="Wrap" Text="Год рождения" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="CheckIfNumbers" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="WasHired_TextBox" Height="20" Margin="80,200,80,230" TextWrapping="Wrap" Text="Год трудоустройства" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="CheckIfNumbers" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="Rank_TextBox" Height="20" Margin="80,240,80,190" TextWrapping="Wrap" Text="Должность" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
+        <ComboBox x:Name="Position_ComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Margin="80,280,0,0" Height="20" SelectionChanged="ValidateComboBox">
             <ComboBoxItem Content="Доцент"/>
             <ComboBoxItem Content="Старший исследователь"/>
             <ComboBoxItem Content="Профессор"/>

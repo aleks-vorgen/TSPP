@@ -25,12 +25,14 @@ namespace TSPP.DB
             SqlDataReader reader = command.ExecuteReader();
             return reader;
         }
+
         public static void Close_DB_Connection()
         {
             string cn_String = Properties.Settings.Default.constr;
             SqlConnection cn_connection = new SqlConnection(cn_String);
             if (cn_connection.State != ConnectionState.Closed) cn_connection.Close();
         }
+
         public static void InsertEmployee(string surname, uint birth_year, uint was_hired_year, string position,
             string rank, uint retirement_exp, string cathedra_name)
         {
@@ -40,6 +42,7 @@ namespace TSPP.DB
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
+
         public static void AddUser(string username, string password, bool is_worker)
         {
             SqlConnection connection = Connect();

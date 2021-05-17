@@ -41,6 +41,7 @@ namespace TSPP
         private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
         {
             AddInfo addInfoForm = new AddInfo();
+            
             addInfoForm.Show();
         }
 
