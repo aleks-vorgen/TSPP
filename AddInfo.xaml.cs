@@ -30,7 +30,6 @@ namespace TSPP
 			if (box.Text == default_box_name || !IsCyrillic(box.Text))
 			{
 				box.BorderBrush = Brushes.Red;
-				all_valid = false;
 				return;
 			}
 			box.BorderBrush = Brushes.Gray;
@@ -53,8 +52,7 @@ namespace TSPP
 		private void ValidateComboBox(object sender, SelectionChangedEventArgs e)
 		{
 			ComboBox box = (ComboBox)sender;
-			if (box.SelectedIndex == -1)
-				all_valid = false;
+			if (box.SelectedIndex == -1) { }
 			else
 				return;
 		}
@@ -80,8 +78,6 @@ namespace TSPP
 
 		private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (!all_valid)
-				MessageBox.Show("Одно или несколько полей не заполнено", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 
 		}
 
@@ -185,11 +181,9 @@ namespace TSPP
 			if (!UInt32.TryParse(box.Text, out value) || value < 0)
 			{
 				box.BorderBrush = Brushes.Red;
-				all_valid = false;
 				return;
 			}
 			box.BorderBrush = Brushes.Gray;
-			all_valid = true;
 		}
 
     }

@@ -73,6 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SearchFilter.xaml.cs">
+      <DependentUpon>SearchFilter.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +107,10 @@
     <Compile Include="InfoForm.xaml.cs">
       <DependentUpon>InfoForm.xaml</DependentUpon>
     </Compile>
+    <Page Include="SearchFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -150,6 +157,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Resource Include="Resources\SSU_minimized.png" />
+    <Resource Include="Resources\SSU.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

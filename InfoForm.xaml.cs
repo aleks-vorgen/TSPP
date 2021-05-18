@@ -58,5 +58,11 @@ namespace TSPP
             }
             Environment.Exit(1);
         }
+
+        private void ShowSearchFilter_Button_Click(object sender, RoutedEventArgs e)
+        {
+            SearchFilter searchFilter = new SearchFilter();
+            searchFilter.Show();
+        }
     }
 }
