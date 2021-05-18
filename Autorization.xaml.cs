@@ -54,7 +54,29 @@ namespace TSPP
         }
         private void AuthenticateUser(string username, string password)
         {
+            AlertBox.Content = "";
+            if (username == "" || password == "")
+            {
+                if (username == "")
+                {
+                    AlertBox.Content = "Введите логин";
+                    AlertBox.Visibility = System.Windows.Visibility.Visible;
+                    LogInField.BorderBrush = Brushes.Red;
+                }
+                if (password == "")
+                {
+                    if (AlertBox.Content == "")
+                        AlertBox.Content = "Введите пароль";
+                    else
+                        AlertBox.Content += "\nВведите пароль";
+                    AlertBox.Visibility = System.Windows.Visibility.Visible;
+                    PasswordField.BorderBrush = Brushes.Red;
+                }
+                return;
+            }           
             string password_from_db = GetPassword(username);
+            if (password_from_db == null)
+                return;
             if (password != password_from_db)
             {
                 AlertBox.Content = "Пароль не совпадает";
@@ -71,6 +93,7 @@ namespace TSPP
         public Autorization()
         {
             InitializeComponent();
+            AlertBox.Content = "";
             AlertBox.Visibility = System.Windows.Visibility.Hidden;
             LogInField.Focus();
         }
@@ -87,6 +110,8 @@ namespace TSPP
 
         private void PasswordField_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            PasswordBox box = (PasswordBox)sender;
+            box.BorderBrush = Brushes.Gray;
             if (e.Key == Key.Enter)
             {
                 AuthenticateUser(LogInField.Text.Trim(), PasswordField.Password.Trim());

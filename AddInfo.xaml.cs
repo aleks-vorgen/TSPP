@@ -30,9 +30,10 @@ namespace TSPP
 			if (box.Text == default_box_name || !IsCyrillic(box.Text))
 			{
 				box.BorderBrush = Brushes.Red;
-				all_valid = false;
+				validity[box.Name] = false;
 				return;
 			}
+			validity[box.Name] = true;
 			box.BorderBrush = Brushes.Gray;
 		}
 
@@ -40,25 +41,13 @@ namespace TSPP
 
 		private void ValidityDictInit()
         {
-			validity.Add(Surname_textBox.Name, false);
-			validity.Add(Cathedra_textBox.Name, false);
-			validity.Add(Birth_TextBox.Name, false);
-			validity.Add(WasHired_TextBox.Name, false);
-			validity.Add(Rank_TextBox.Name, false);
-			validity.Add(Position_ComboBox.Name, false);
+			validity[Surname_textBox.Name]= false;
+			validity[Rank_TextBox.Name]= false;
+			validity[Cathedra_textBox.Name] = false;
+			validity[Birth_TextBox.Name] = false;
+			validity[WasHired_TextBox.Name] = false;
+			validity[Position_ComboBox.Name] = false;
         }
-
-
-
-		private void ValidateComboBox(object sender, SelectionChangedEventArgs e)
-		{
-			ComboBox box = (ComboBox)sender;
-			if (box.SelectedIndex == -1)
-				all_valid = false;
-			else
-				return;
-		}
-
 
 
 		private void ValidateTextBox(object sender, RoutedEventArgs e)
@@ -80,11 +69,40 @@ namespace TSPP
 
 		private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (!all_valid)
-				MessageBox.Show("Одно или несколько полей не заполнено", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+			if (Position_ComboBox.SelectedIndex == -1)
+            {
+				validity["Position_ComboBox"] = false;
+				Position_ComboBox.BorderBrush = Brushes.Red;
+				System.Windows.Forms.MessageBox.Show(
+				"Выберите звание сотрудника",
+				"Ошибка заполнения",
+				System.Windows.Forms.MessageBoxButtons.OK);
+				return;
+			}
+			bool flag = true;
+			foreach(string key in validity.Keys)
+            {
+				if (validity[key] != true)
+				{
+					flag = false;
+					break;
+				}
+            }
+			if (flag)
+            {
+				DateTime now = DateTime.Today;
+				TSPP.DB.DB.InsertEmployee(Surname_textBox.Text, UInt16.Parse(Birth_TextBox.Text), UInt16.Parse(WasHired_TextBox.Text),
+					Position_ComboBox.SelectedItem.ToString().Split(' ')[1], Rank_TextBox.Text, (uint)now.Year - UInt16.Parse(WasHired_TextBox.Text),
+					Cathedra_textBox.Text);
+				this.Close();
+				return;
+            }
+			System.Windows.Forms.MessageBox.Show(
+				"Некоторые поля имееют ошибки",
+				"Ошибка заполнения",
+				System.Windows.Forms.MessageBoxButtons.OK);
 
 		}
-
 		private void AddInfo_ClearButton_Click(object sender, RoutedEventArgs e)
 		{
 			Surname_textBox.Text = "Фамилия";
@@ -92,6 +110,7 @@ namespace TSPP
 			Birth_TextBox.Text = "Год рождения";
 			WasHired_TextBox.Text = "Год трудоустройства";
 			Rank_TextBox.Text = "Должность";
+			Position_ComboBox.SelectedIndex = -1;
 		}
 
 		private void AddInfo_CancleButton_Click(object sender, RoutedEventArgs e)
@@ -185,12 +204,18 @@ namespace TSPP
 			if (!UInt32.TryParse(box.Text, out value) || value < 0)
 			{
 				box.BorderBrush = Brushes.Red;
-				all_valid = false;
+				validity[box.Name] = false;
 				return;
 			}
+			validity[box.Name] = true;
 			box.BorderBrush = Brushes.Gray;
-			all_valid = true;
 		}
 
+        private void Position_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			ComboBox box = (ComboBox)sender;
+			box.BorderBrush = Brushes.Gray;
+			validity[box.Name] = true;
+        }
     }
 }

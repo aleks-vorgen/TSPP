@@ -15,7 +15,7 @@
             <ColumnDefinition Width="63*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="AutorizationButton" Content="Войти" HorizontalAlignment="Center" Height="50" Margin="50,340,50,30" VerticalAlignment="Center" Width="200" Background="{x:Null}" BorderBrush="Black" Foreground="Black" Click="AutorizationButton_Click" Grid.ColumnSpan="2" KeyboardNavigation.IsTabStop="False"/>
-        <PasswordBox x:Name="PasswordField" Height="20" Margin="80,253,80,147" Width="140" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" BorderThickness="1" CaretBrush="Black" Grid.ColumnSpan="2" PreviewKeyDown="PasswordField_PreviewKeyDown"/>
+        <PasswordBox x:Name="PasswordField" Height="20" Margin="80,253,80,147" Width="140" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" BorderThickness="1" CaretBrush="Black" Grid.ColumnSpan="2" PreviewKeyDown="PasswordField_PreviewKeyDown" />
         <TextBox x:Name="LogInField" Height="20" TextWrapping="Wrap" Width="140" Margin="80,140,80,260" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" CaretBrush="Black" TextChanged="LogInField_TextChanged" Grid.ColumnSpan="2" />
         <TextBlock HorizontalAlignment="Left" Margin="80,124,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" Width="40" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,237,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
