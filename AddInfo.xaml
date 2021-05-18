@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddInfo" Height="450" Width="320" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" IsTabStop="True" WindowStyle="None" Icon="Resources/SSU_minimized.png">
     <Grid>
-        <Image Source="Resources/SSU.png" HorizontalAlignment="Left" Height="420" Width="300" Margin="20,20,0,0" VerticalAlignment="Top" Opacity="0.7"/>
+        <Image Source="Resources/SSU_minimized.png" HorizontalAlignment="Left" Height="420" Width="320" VerticalAlignment="Top" Opacity="0.4" Margin="0,30,0,0"/>
         <TextBox x:Name="Surname_textBox" Height="20" Margin="80,80,80,350" TextWrapping="Wrap" Text="Фамилия" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
         <TextBox x:Name="Cathedra_textBox" Margin="80,120,80,310" TextWrapping="Wrap" Text="Кафедра" Height="20" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="ValidateTextBox" LostFocus="TextBox_LostFocus"/>
         <TextBox x:Name="Birth_TextBox" Height="20" Margin="80,160,80,270" TextWrapping="Wrap" Text="Год рождения" UndoLimit="10" GotFocus="ClearOnClickIfDefault" TextChanged="CheckIfNumbers" LostFocus="TextBox_LostFocus"/>
