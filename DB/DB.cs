@@ -37,8 +37,8 @@ namespace TSPP.DB
             string rank, uint retirement_exp, string cathedra_name)
         {
             SqlConnection connection = Connect();
-            string query = "INSERT INTO [EmployeeList] ([surname], [birth_year], [was_hired_year], [position], [rank], "
-                + $"[retirement_exp], [carthedra_name] VALUES ({surname}, {birth_year},{was_hired_year}, {position}, {rank}, {retirement_exp}, {cathedra_name})";
+            string query = "INSERT INTO [EmployeesList] ([surname], [birth_year], [was_hired_year], [position], [rank], "
+                + $"[retirement_exp], [cathedra_name]) VALUES ('{surname}', {birth_year},{was_hired_year}, '{position}', '{rank}', {retirement_exp}, '{cathedra_name}');";
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
         }

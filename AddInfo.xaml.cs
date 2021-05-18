@@ -32,6 +32,7 @@ namespace TSPP
 				box.BorderBrush = Brushes.Red;
 				return;
 			}
+			validity[box.Name] = true;
 			box.BorderBrush = Brushes.Gray;
 		}
 
@@ -39,24 +40,13 @@ namespace TSPP
 
 		private void ValidityDictInit()
         {
-			validity.Add(Surname_textBox.Name, false);
-			validity.Add(Cathedra_textBox.Name, false);
-			validity.Add(Birth_TextBox.Name, false);
-			validity.Add(WasHired_TextBox.Name, false);
-			validity.Add(Rank_TextBox.Name, false);
-			validity.Add(Position_ComboBox.Name, false);
+			validity[Surname_textBox.Name]= false;
+			validity[Rank_TextBox.Name]= false;
+			validity[Cathedra_textBox.Name] = false;
+			validity[Birth_TextBox.Name] = false;
+			validity[WasHired_TextBox.Name] = false;
+			validity[Position_ComboBox.Name] = false;
         }
-
-
-
-		private void ValidateComboBox(object sender, SelectionChangedEventArgs e)
-		{
-			ComboBox box = (ComboBox)sender;
-			if (box.SelectedIndex == -1) { }
-			else
-				return;
-		}
-
 
 
 		private void ValidateTextBox(object sender, RoutedEventArgs e)
@@ -80,7 +70,6 @@ namespace TSPP
 		{
 
 		}
-
 		private void AddInfo_ClearButton_Click(object sender, RoutedEventArgs e)
 		{
 			Surname_textBox.Text = "Фамилия";
@@ -88,6 +77,7 @@ namespace TSPP
 			Birth_TextBox.Text = "Год рождения";
 			WasHired_TextBox.Text = "Год трудоустройства";
 			Rank_TextBox.Text = "Должность";
+			Position_ComboBox.SelectedIndex = -1;
 		}
 
 		private void AddInfo_CancleButton_Click(object sender, RoutedEventArgs e)
@@ -183,8 +173,15 @@ namespace TSPP
 				box.BorderBrush = Brushes.Red;
 				return;
 			}
+			validity[box.Name] = true;
 			box.BorderBrush = Brushes.Gray;
 		}
 
+        private void Position_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			ComboBox box = (ComboBox)sender;
+			box.BorderBrush = Brushes.Gray;
+			validity[box.Name] = true;
+        }
     }
 }

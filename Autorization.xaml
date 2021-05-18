@@ -16,6 +16,6 @@
         <TextBox x:Name="LogInField" TextWrapping="Wrap" Margin="80,140,80,260" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" CaretBrush="Black" TextChanged="LogInField_TextChanged" Grid.ColumnSpan="2" />
         <TextBlock HorizontalAlignment="Left" Margin="80,237,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="16" Width="70" FontFamily="Arial" FontSize="14"/>
         <PasswordBox x:Name="PasswordField" Margin="80,253,80,147" Background="White" BorderBrush="Black" Foreground="Black" SelectionBrush="#FF00D1FF" BorderThickness="1" CaretBrush="Black" Grid.ColumnSpan="2" PreviewKeyDown="PasswordField_PreviewKeyDown"/>
-        <Button x:Name="AutorizationButton" Content="Войти" HorizontalAlignment="Center" Height="50" Margin="50,340,50,30" VerticalAlignment="Center" Width="200" BorderBrush="Black" Foreground="Black" Click="AutorizationButton_Click" KeyboardNavigation.IsTabStop="False" FontFamily="Arial Black" FontSize="18" />
+            <Button x:Name="AutorizationButton" Content="Войти" HorizontalAlignment="Center" Height="50" Margin="50,340,50,30" VerticalAlignment="Center" Width="200" BorderBrush="Black" Foreground="Black" Click="AutorizationButton_Click" KeyboardNavigation.IsTabStop="False" FontFamily="Arial Black" FontSize="18" />
     </Grid>
 </Window>
