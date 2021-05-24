@@ -15,30 +15,31 @@ using System.Text.RegularExpressions;
 
 namespace TSPP
 {
-	/// <summary>
-	/// Логика взаимодействия для AddInfo.xaml
-	/// </summary>
-	public partial class AddInfo : Window
-	{
-		public AddInfo()
-		{
-			InitializeComponent();
-			ValidityDictInit();
-		}
-		static public void CheckTextBox(TextBox box, string default_box_name)
-		{
-			if (box.Text == default_box_name || !IsCyrillic(box.Text))
-			{
-				box.BorderBrush = Brushes.Red;
-				return;
-			}
-			validity[box.Name] = true;
-			box.BorderBrush = Brushes.Gray;
-		}
+    /// <summary>
+    /// Логика взаимодействия для AddInfo.xaml
+    /// </summary>
+    public partial class AddInfo : Window
+    {
+        public AddInfo()
+        {
+            InitializeComponent();
+            ValidityDictInit();
+        }
+        static public void CheckTextBox(TextBox box, string default_box_name)
+        {
+            if (box.Text == default_box_name || !IsCyrillic(box.Text))
+            {
+                box.BorderBrush = Brushes.Red;
+                validity[box.Name] = false;
+                return;
+            }
+            validity[box.Name] = true;
+            box.BorderBrush = Brushes.Gray;
+        }
 
-		private static Dictionary<string, bool> validity = new Dictionary<string, bool>(6);
+        private static Dictionary<string, bool> validity = new Dictionary<string, bool>(6);
 
-		private void ValidityDictInit()
+        private void ValidityDictInit()
         {
 			validity[Surname_textBox.Name] = false;
 			validity[Rank_TextBox.Name] = false;
@@ -46,142 +47,192 @@ namespace TSPP
 			validity[Birth_TextBox.Name] = false;
 			validity[WasHired_TextBox.Name] = false;
 			validity[Position_ComboBox.Name] = false;
+            validity[Surname_textBox.Name] = false;
+            validity[Rank_TextBox.Name] = false;
+            validity[Cathedra_textBox.Name] = false;
+            validity[Birth_TextBox.Name] = false;
+            validity[WasHired_TextBox.Name] = false;
+            validity[Position_ComboBox.Name] = false;
         }
 
 
-		private void ValidateTextBox(object sender, RoutedEventArgs e)
-		{
-			TextBox box = (TextBox)sender;
-			if (box.Name == "Surname_textBox")
-			{
-				CheckTextBox(box, "Surname_textBox");
-			}
-			if (box.Name == "Cathedra_textBox")
-			{
-				CheckTextBox(box, "Cathedra_textBox");
-			}
-			if (box.Name == "Rank_TextBox")
-			{
-				CheckTextBox(box, "Rank_TextBox");
-			}
-		}
+        private void ValidateTextBox(object sender, RoutedEventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+            if (box.Name == "Surname_textBox")
+            {
+                CheckTextBox(box, "Surname_textBox");
+            }
+            if (box.Name == "Cathedra_textBox")
+            {
+                CheckTextBox(box, "Cathedra_textBox");
+            }
+            if (box.Name == "Rank_TextBox")
+            {
+                CheckTextBox(box, "Rank_TextBox");
+            }
+        }
+        private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Position_ComboBox.SelectedIndex == -1)
+            {
+                validity["Position_ComboBox"] = false;
+                Position_ComboBox.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Выберите звание сотрудника",
+                "Ошибка заполнения",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                return;
+            }
+            bool flag = true;
+            foreach (string key in validity.Keys)
+            {
+                if (validity[key] != true)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                try
+                {
+                    DateTime now = DateTime.Today;
+                    TSPP.DB.DB.InsertEmployee(Surname_textBox.Text, UInt16.Parse(Birth_TextBox.Text), UInt16.Parse(WasHired_TextBox.Text),
+                        Position_ComboBox.SelectedItem.ToString().Split(' ')[1], Rank_TextBox.Text, (uint)now.Year - UInt16.Parse(WasHired_TextBox.Text),
+                        Cathedra_textBox.Text);
+                    this.Close();
+                    System.Windows.Forms.MessageBox.Show(
+                "Данные были успешно добавлены",
+                "Успех",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                } catch (Exception)
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                "При добавлении случилась непредвиденная ошибка",
+                "Неудача",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                }
 
-		private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
-		{
+                return;
+            }
+            System.Windows.Forms.MessageBox.Show(
+                "Некоторые поля имееют ошибки",
+                "Ошибка заполнения",
+                System.Windows.Forms.MessageBoxButtons.OK);
+        }
+        private void AddInfo_ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            Surname_textBox.Text = "Фамилия";
+            Cathedra_textBox.Text = "Кафедра";
+            Birth_TextBox.Text = "Год рождения";
+            WasHired_TextBox.Text = "Год трудоустройства";
+            Rank_TextBox.Text = "Должность";
+            Position_ComboBox.SelectedIndex = -1;
+        }
 
-		}
-		private void AddInfo_ClearButton_Click(object sender, RoutedEventArgs e)
-		{
-			Surname_textBox.Text = "Фамилия";
-			Cathedra_textBox.Text = "Кафедра";
-			Birth_TextBox.Text = "Год рождения";
-			WasHired_TextBox.Text = "Год трудоустройства";
-			Rank_TextBox.Text = "Должность";
-			Position_ComboBox.SelectedIndex = -1;
-		}
+        private void AddInfo_CancleButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-		private void AddInfo_CancleButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
+        private void ClearOnClickIfDefault(object sender, RoutedEventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+            if (box.Name == "Surname_textBox")
+            {
+                if (box.Text == "Фамилия")
+                    box.Clear();
+                return;
+            }
+            if (box.Name == "Cathedra_textBox")
+            {
+                if (box.Text == "Кафедра")
+                    box.Clear();
+                return;
+            }
+            if (box.Name == "Birth_TextBox")
+            {
+                if (box.Text == "Год рождения")
+                    box.Clear();
+                return;
+            }
+            if (box.Name == "WasHired_TextBox")
+            {
+                if (box.Text == "Год трудоустройства")
+                    box.Clear();
+                return;
+            }
+            if (box.Name == "Rank_TextBox")
+            {
+                if (box.Text == "Должность")
+                    box.Clear();
+                return;
+            }
+            box.Clear();
+        }
 
-		private void ClearOnClickIfDefault(object sender, RoutedEventArgs e)
-		{
-			TextBox box = (TextBox)sender;
-			if (box.Name == "Surname_textBox")
-			{
-				if (box.Text == "Фамилия")
-					box.Clear();
-				return;
-			}
-			if (box.Name == "Cathedra_textBox")
-			{
-				if (box.Text == "Кафедра")
-					box.Clear();
-				return;
-			}
-			if (box.Name == "Birth_TextBox")
-			{
-				if (box.Text == "Год рождения")
-					box.Clear();
-				return;
-			}
-			if (box.Name == "WasHired_TextBox")
-			{
-				if (box.Text == "Год трудоустройства")
-					box.Clear();
-				return;
-			}
-			if (box.Name == "Rank_TextBox")
-			{
-				if (box.Text == "Должность")
-					box.Clear();
-				return;
-			}
-			box.Clear();
-		}
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+            if (box.Text == "")
+            {
+                if (box.Name == "Surname_textBox")
+                {
+                    Surname_textBox.Text = "Фамилия";
+                    return;
+                }
+                if (box.Name == "Cathedra_textBox")
+                {
+                    Cathedra_textBox.Text = "Кафедра";
+                    return;
+                }
+                if (box.Name == "Birth_TextBox")
+                {
+                    Birth_TextBox.Text = "Год рождения";
+                    return;
+                }
+                if (box.Name == "WasHired_TextBox")
+                {
+                    WasHired_TextBox.Text = "Год трудоустройства";
+                    return;
+                }
+                if (box.Name == "Rank_TextBox")
+                {
+                    Rank_TextBox.Text = "Должность";
+                    return;
+                }
+            }
+            ValidateTextBox(box, e);
+        }
 
-		private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-		{
-			TextBox box = (TextBox)sender;
-			if (box.Text == "")
-			{
-				if (box.Name == "Surname_textBox")
-				{
-					Surname_textBox.Text = "Фамилия";
-					return;
-				}
-				if (box.Name == "Cathedra_textBox")
-				{
-					Cathedra_textBox.Text = "Кафедра";
-					return;
-				}
-				if (box.Name == "Birth_TextBox")
-				{
-					Birth_TextBox.Text = "Год рождения";
-					return;
-				}
-				if (box.Name == "WasHired_TextBox")
-				{
-					WasHired_TextBox.Text = "Год трудоустройства";
-					return;
-				}
-				if (box.Name == "Rank_TextBox")
-				{
-					Rank_TextBox.Text = "Должность";
-					return;
-				}
-			}
-			ValidateTextBox(box, e);
-		}
-
-		static private bool IsCyrillic(string sstring)
-		{
-			return Regex.IsMatch(sstring, @"\p{IsCyrillic}");
-		}
-
-		private void CheckIfNumbers(object sender, TextChangedEventArgs e)
-		{
-			TextBox box = (TextBox)sender;
-			uint value;
-			if (box.Name == "WasHired_TextBox" && (box.Text == "Год трудоустройства" || box.Text == ""))
-				return;
-			if (box.Name == "Birth_TextBox" && (box.Text == "Год рождения" || box.Text == ""))
-				return;
-			if (!UInt32.TryParse(box.Text, out value) || value < 0)
-			{
-				box.BorderBrush = Brushes.Red;
-				return;
-			}
-			validity[box.Name] = true;
-			box.BorderBrush = Brushes.Gray;
-		}
+        static private bool IsCyrillic(string sstring)
+        {
+            return Regex.IsMatch(sstring, @"\p{IsCyrillic}");
+        }
+        private void CheckIfNumbers(object sender, TextChangedEventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+            uint value;
+            if (box.Name == "WasHired_TextBox" && (box.Text == "Год трудоустройства" || box.Text == ""))
+                return;
+            if (box.Name == "Birth_TextBox" && (box.Text == "Год рождения" || box.Text == ""))
+                return;
+            if (!UInt32.TryParse(box.Text, out value) || value < 0)
+            {
+                box.BorderBrush = Brushes.Red;
+                validity[box.Name] = false;
+                return;
+            }
+            validity[box.Name] = true;
+            box.BorderBrush = Brushes.Gray;
+        }
 
         private void Position_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-			ComboBox box = (ComboBox)sender;
-			box.BorderBrush = Brushes.Gray;
-			validity[box.Name] = true;
+            ComboBox box = (ComboBox)sender;
+            box.BorderBrush = Brushes.Gray;
+            validity[box.Name] = true;
         }
     }
 }
