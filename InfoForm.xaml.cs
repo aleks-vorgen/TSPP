@@ -15,7 +15,10 @@ using System.Windows.Shapes;
 using Word = Microsoft.Office.Interop.Word;
 using Xceed.Words.NET;
 using Xceed.Document.NET;
-
+using System.Drawing;
+using System.ComponentModel;
+using System.Data.SqlClient;
+using System.Data;
 namespace TSPP
 {
     /// <summary>
@@ -32,7 +35,6 @@ namespace TSPP
         {
 
             TSPP.Database1DataSet EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
-            // Загрузить данные в таблицу EmployeesList. Можно изменить этот код как требуется.
             TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter =
                 new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
             database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
@@ -77,114 +79,70 @@ namespace TSPP
             string position = (string)SelectedRow.Row.ItemArray[4];
             string rank = (string)SelectedRow.Row.ItemArray[5];
             string cathedra_name = (string)SelectedRow.Row.ItemArray[7];
-            AddInfo EditForm = new AddInfo("Редактирование",id, surname, birth_year, was_hired_year, rank, cathedra_name);
+            AddInfo EditForm = new AddInfo("Редактирование", id, surname, birth_year, was_hired_year, rank, cathedra_name);
             EditForm.Show();
         }
         private void PrintData(object sender, RoutedEventArgs e)
         { 
-            string[] article = new string[20];
-            string[] id = new string[20];
-            string[] name = new string[20];
-            string[] price = new string[20];
-            string[] count = new string[20];
-            string[] Priceid = new string[20];
+            string pathDocument = AppDomain.CurrentDomain.BaseDirectory + "Отчёт.docx";
+            // создаём документ
+            DocX document = DocX.Create(pathDocument);
             int size = 0;
-            int priceSize = 0;
-
-            BindingList<DATA> DatA;
-            DatA = new BindingList<DATA>(); // Выделяем динамическую память под переменную привязки данных
-
-            string connector = "server=localhost;user=root;database=range_of_shoes;password=1234;";
-            MySqlConnection conn = new MySqlConnection(connector); // Подключаемся к серверу
-            conn.Open();
-
-            string sql = "SELECT id, article, name, count, price FROM new_table WHERE id > 0";
-
-            MySqlCommand comman = new MySqlCommand(sql, conn);
-
-            MySqlDataReader reader = comman.ExecuteReader();
-            int j = 0;
-
+            SqlDataReader reader = DB.DB.GetReaderForQuery("SELECT count(*) FROM [EmployeesList];");
             while (reader.Read())
+                size = reader.GetInt32(0);
+            Xceed.Document.NET.Table table = document.AddTable(size + 1, 7);
+            // располагаем таблицу по центру
+            table.Alignment = Alignment.center;
+            // меняем стандартный дизайн таблицы
+            table.Design = TableDesign.TableGrid;
+
+            // заполнение ячейки текстом
+            table.Rows[0].Cells[0].Paragraphs[0].Append("Фамилия").FontSize(18);
+            table.Rows[0].Cells[1].Paragraphs[0].Append("Год рождения").FontSize(18);
+            table.Rows[0].Cells[2].Paragraphs[0].Append("Нанят").FontSize(18);
+            table.Rows[0].Cells[3].Paragraphs[0].Append("Звание").FontSize(18);
+            table.Rows[0].Cells[4].Paragraphs[0].Append("Должность").FontSize(18);
+            table.Rows[0].Cells[5].Paragraphs[0].Append("Пенсионный стаж").FontSize(18);
+            table.Rows[0].Cells[6].Paragraphs[0].Append("Кафедра").FontSize(18);
+
+            SqlDataReader reader2 = DB.DB.GetReaderForQuery("SELECT * FROM [EmployeesList];");
+            int id;
+            string surname;
+            uint birth_year;
+            uint was_hired_year;
+            string position;
+            string rank;
+            uint retirement_exp;
+            string cathedra_name;
+            int row = 1;
+            while (reader2.Read())
             {
-                id[j] = reader[0].ToString(); // id
-                article[j] = reader[1].ToString(); // article
-                name[j] = reader[2].ToString(); // name
-                count[j] = reader[3].ToString(); // count
-                price[j] = reader[4].ToString(); // price
-                j++;
-                size++;
+                id = reader2.GetInt32(0);
+                surname = reader2.GetString(1);
+                birth_year = (uint)reader2.GetInt32(2);
+                was_hired_year = (uint)reader2.GetInt32(3);
+                position = reader2.GetString(4);
+                rank = reader2.GetString(5);
+                retirement_exp = (uint)reader2.GetInt32(6);
+                cathedra_name = reader2.GetString(7);
+
+                table.Rows[row].Cells[0].Paragraphs[0].Append(surname);
+
+                table.Rows[row].Cells[1].Paragraphs[0].Append(Convert.ToString(birth_year));
+
+                table.Rows[row].Cells[2].Paragraphs[0].Append(Convert.ToString(was_hired_year));
+
+                table.Rows[row].Cells[3].Paragraphs[0].Append(position);
+
+                table.Rows[row].Cells[4].Paragraphs[0].Append(rank);
+
+                table.Rows[row].Cells[5].Paragraphs[0].Append(Convert.ToString(retirement_exp));
+
+                table.Rows[row].Cells[6].Paragraphs[0].Append(cathedra_name);
             }
-            for (int k = 0; k < j; k++)
-            {
-                if (price[k] == inputer.Text)
-                {
-                    Priceid[priceSize] = id[k];
-                    priceSize++;
-                }
-            }
-            conn.Close();
-            if (priceSize > 0)
-            {
-
-                string pathDocument = AppDomain.CurrentDomain.BaseDirectory + "Price.docx";
-
-                // создаём документ
-                DocX document = DocX.Create(pathDocument);
-
-                // создаём таблицу с 3 строками и 2 столбцами
-                Table table = document.AddTable(priceSize + 1, 5);
-                // располагаем таблицу по центру
-                table.Alignment = Alignment.center;
-                // меняем стандартный дизайн таблицы
-                table.Design = TableDesign.TableGrid;
-
-
-                // заполнение ячейки текстом
-                table.Rows[0].Cells[0].Paragraphs[0].Append("id").FontSize(18);
-                // заполнение ячейки ссылкой
-
-                table.Rows[0].Cells[1].Paragraphs[0].Append("article").FontSize(18);
-
-                table.Rows[0].Cells[2].Paragraphs[0].Append("name").FontSize(18);
-
-                table.Rows[0].Cells[3].Paragraphs[0].Append("count").FontSize(18);
-
-                table.Rows[0].Cells[4].Paragraphs[0].Append("price").FontSize(18);
-
-                int rows = 1;
-                for (int i = 0; i < size; i++)
-                {
-                    for (int b = 0; b < priceSize; b++)
-                    {
-                        if (id[i] == Priceid[b])
-                        {
-
-                            table.Rows[rows].Cells[0].Paragraphs[0].Append(id[i]);
-
-                            table.Rows[rows].Cells[1].Paragraphs[0].Append(article[i]);
-
-                            table.Rows[rows].Cells[2].Paragraphs[0].Append(name[i]);
-
-                            table.Rows[rows].Cells[3].Paragraphs[0].Append(count[i]);
-
-                            table.Rows[rows].Cells[4].Paragraphs[0].Append(price[i]);
-
-                            rows++;
-
-                        }
-                    }
-
-
-                }
-
-                document.InsertParagraph().InsertTableAfterSelf(table);
-
-                // сохраняем документ
-                document.Save();
-
-
-            }
-
+            document.InsertParagraph().InsertTableAfterSelf(table);
+            document.Save();
         }
+    }
 }
