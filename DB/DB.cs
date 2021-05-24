@@ -42,6 +42,17 @@ namespace TSPP.DB
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
+        public static void UpdateEmployee(int id, string surname, uint birth_year, uint was_hired_year, string position,
+            string rank, uint retirement_exp, string cathedra_name)
+        {
+            SqlConnection connection = Connect();
+            string query = "UPDATE [EmployeesList]" +
+                $" SET [surname]=N'{surname}', [birth_year] = {birth_year}, [was_hired_year] = {was_hired_year}, [position] = N'{position}', [rank] = N'{rank}',"
+                + $" [retirement_exp] = {retirement_exp}, [cathedra_name] = N'{cathedra_name}'" +
+                $" WHERE [id] = {id}";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
 
         public static void AddUser(string username, string password, bool is_worker)
         {

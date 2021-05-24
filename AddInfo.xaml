@@ -31,7 +31,7 @@
                 </TransformGroup>
             </GridSplitter.RenderTransform>
         </GridSplitter>
-        <TextBlock TextWrapping="Wrap" Text="Добавление сотрудника" Margin="10,20,10,410" Width="300" TextAlignment="Center" LineHeight="24"/>
+        <TextBlock x:Name="Title" TextWrapping="Wrap" Text="Добавление сотрудника" Margin="10,20,10,410" Width="300" TextAlignment="Center" LineHeight="24"/>
         <GridSplitter HorizontalAlignment="Stretch" Height="314" Margin="0,160,0,-30" Width="5" RenderTransformOrigin="0.5,0.5" Focusable="False" IsTabStop="False" Cursor="Arrow">
             <GridSplitter.RenderTransform>
                 <TransformGroup>

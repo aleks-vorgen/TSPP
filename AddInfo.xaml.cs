@@ -20,11 +20,32 @@ namespace TSPP
     /// </summary>
     public partial class AddInfo : Window
     {
+        private delegate void AddOrEditDelegate(object sender, RoutedEventArgs e);
+        private static AddOrEditDelegate func;
+        private static Dictionary<string, bool> validity = new Dictionary<string, bool>(6);
+        private static int employee_id;
         public AddInfo()
         {
             InitializeComponent();
+            func = AddEmployee;
             ValidityDictInit();
         }
+        public AddInfo(string title, int id, string surname, uint birth_year, uint was_hired_year,
+            string rank, string cathedra_name)
+        {
+            InitializeComponent();
+            ValidityDictInit();
+            this.Title.Text = title;
+            this.Surname_textBox.Text = surname;
+            this.Birth_TextBox.Text = birth_year.ToString();
+            this.WasHired_TextBox.Text = was_hired_year.ToString();
+            this.Rank_TextBox.Text = rank;
+            this.Cathedra_textBox.Text = cathedra_name;
+            this.AddInfo_Button.Content = "Обновить";
+            employee_id = id;
+            func = EditEmployee;      
+        }
+
         static public void CheckTextBox(TextBox box, string default_box_name)
         {
             if (box.Text == default_box_name || !IsCyrillic(box.Text))
@@ -37,7 +58,7 @@ namespace TSPP
             box.BorderBrush = Brushes.Gray;
         }
 
-        private static Dictionary<string, bool> validity = new Dictionary<string, bool>(6);
+        
 
         private void ValidityDictInit()
         {
@@ -66,7 +87,50 @@ namespace TSPP
                 CheckTextBox(box, "Rank_TextBox");
             }
         }
-        private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
+
+        
+        private void EditEmployee(object sender, RoutedEventArgs e)
+        {
+            bool flag = true;
+            foreach (string key in validity.Keys)
+            {
+                if (validity[key] != true)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                try
+                {
+                    DateTime now = DateTime.Today;
+                    TSPP.DB.DB.UpdateEmployee(employee_id, Surname_textBox.Text, UInt16.Parse(Birth_TextBox.Text), UInt16.Parse(WasHired_TextBox.Text),
+                        Position_ComboBox.SelectedItem.ToString().Split(' ')[1], Rank_TextBox.Text, (uint)now.Year - UInt16.Parse(WasHired_TextBox.Text),
+                        Cathedra_textBox.Text);
+                    this.Close();
+                    System.Windows.Forms.MessageBox.Show(
+                "Данные были успешно обновлены",
+                "Успех",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                }
+                catch (Exception)
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                "При редактировании случилась непредвиденная ошибка, вероятно превышена длинна ввода.",
+                "Неудача",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                }
+
+                return;
+            }
+            System.Windows.Forms.MessageBox.Show(
+                "Некоторые поля имееют ошибки",
+                "Ошибка заполнения",
+                System.Windows.Forms.MessageBoxButtons.OK);
+
+        }
+        private void AddEmployee(object sender, RoutedEventArgs e)
         {
             if (Position_ComboBox.SelectedIndex == -1)
             {
@@ -100,10 +164,11 @@ namespace TSPP
                 "Данные были успешно добавлены",
                 "Успех",
                 System.Windows.Forms.MessageBoxButtons.OK);
-                } catch (Exception)
+                }
+                catch (Exception)
                 {
                     System.Windows.Forms.MessageBox.Show(
-                "При добавлении случилась непредвиденная ошибка",
+                "При добавлении случилась непредвиденная ошибка, вероятно превышена длинна ввода.",
                 "Неудача",
                 System.Windows.Forms.MessageBoxButtons.OK);
                 }
@@ -114,6 +179,10 @@ namespace TSPP
                 "Некоторые поля имееют ошибки",
                 "Ошибка заполнения",
                 System.Windows.Forms.MessageBoxButtons.OK);
+        }
+        private void AddInfo_Button_Click(object sender, RoutedEventArgs e)
+        {
+            func(sender, e);
         }
         private void AddInfo_ClearButton_Click(object sender, RoutedEventArgs e)
         {

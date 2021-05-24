@@ -41,7 +41,6 @@ namespace TSPP
         private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
         {
             AddInfo addInfoForm = new AddInfo();
-            
             addInfoForm.Show();
         }
 
@@ -67,17 +66,16 @@ namespace TSPP
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Database1DataSet.EmployeesListRow employeesListRow = (Database1DataSet.EmployeesListRow)employeesListDataGrid.SelectedItem;
-            }
-            catch (Exception)
-            {
-                System.Windows.Forms.MessageBox.Show(
-               "Выберите",
-               "Неудача",
-               System.Windows.Forms.MessageBoxButtons.OK);
-            }
+            System.Data.DataRowView SelectedRow = (System.Data.DataRowView)employeesListDataGrid.SelectedItem;
+            int id = (int)SelectedRow.Row.ItemArray[0];
+            string surname = (string)SelectedRow.Row.ItemArray[1];
+            uint birth_year = (uint)(int)SelectedRow.Row.ItemArray[2];
+            uint was_hired_year = (uint)(int)SelectedRow.Row.ItemArray[3];
+            string position = (string)SelectedRow.Row.ItemArray[4];
+            string rank = (string)SelectedRow.Row.ItemArray[5];
+            string cathedra_name = (string)SelectedRow.Row.ItemArray[7];
+            AddInfo EditForm = new AddInfo("Редактирование",id, surname, birth_year, was_hired_year, rank, cathedra_name);
+            EditForm.Show();
         }
 
     }
