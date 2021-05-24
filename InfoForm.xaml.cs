@@ -77,7 +77,7 @@ namespace TSPP
             EditForm.Show();
         }
         private void PrintData(object sender, RoutedEventArgs e)
-        { 
+        {
             string pathDocument = AppDomain.CurrentDomain.BaseDirectory + "Отчёт.docx";
             // создаём документ
             DocX document = DocX.Create(pathDocument);
@@ -125,7 +125,6 @@ namespace TSPP
 
                 table.Rows[row].Cells[1].Paragraphs[0].Append(Convert.ToString(birth_year));
 
-<<<<<<< HEAD
                 table.Rows[row].Cells[2].Paragraphs[0].Append(Convert.ToString(was_hired_year));
 
                 table.Rows[row].Cells[3].Paragraphs[0].Append(position);
@@ -138,7 +137,13 @@ namespace TSPP
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
             document.Save();
-=======
+
+            System.Windows.Forms.MessageBox.Show(
+                "Отчёт успешно сгенерирован.",
+                "Успех",
+                System.Windows.Forms.MessageBoxButtons.OK);
+        }
+
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -147,7 +152,6 @@ namespace TSPP
         private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
->>>>>>> origin/alexus
         }
     }
 }

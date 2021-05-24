@@ -23,25 +23,16 @@
             </DataGrid.Columns>
         </DataGrid>
         <Image Source="Resources/SSU.png" HorizontalAlignment="Left" Height="380" Width="300" Margin="20,20,0,0" VerticalAlignment="Top" Opacity="0.7"/>
-<<<<<<< HEAD
-        <Button x:Name="ShowEmployeeForm_Button" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="260,60,0,0" Click="ShowEmployeeForm_Button_Click"/>
-        <Button x:Name="ShowSearchFilter_Button" Content="🔎" HorizontalAlignment="Left" Margin="260,140,0,0" VerticalAlignment="Top" Width="20" Click="ShowSearchFilter_Button_Click"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="260,100,0,0" VerticalAlignment="Top" Width="20"/>
-        <Button x:Name="EditButton" Content="✎" HorizontalAlignment="Left" Margin="260,179,0,0" VerticalAlignment="Top" Width="20" Click="Edit_Button_Click" RenderTransformOrigin="0.774,1.637"/>
-        <Button x:Name="RefreshButton" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="260,221,0,0" Click="Window_Loaded"/>
-        <Button x:Name="PrintButton" Content="💾" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="260,263,0,0" Click="PrintData"/>
-=======
         <Button x:Name="ShowEmployeeForm_Button" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,60,0,0" Click="ShowEmployeeForm_Button_Click"/>
         <Button x:Name="DeleteEmployee_Button" Content="-" HorizontalAlignment="Left" Margin="260,100,0,0" VerticalAlignment="Top" Width="35"/>
         <Button x:Name="Edit_Button" Content="✎" HorizontalAlignment="Left" Margin="260,140,0,0" VerticalAlignment="Top" Width="35" Click="Edit_Button_Click" RenderTransformOrigin="0.774,1.637"/>
-        <Button x:Name="Refresh_Button" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,180,0,0" Click="Window_Loaded" RenderTransformOrigin="0.5,0.5"/>
-        <Menu HorizontalAlignment="Left" Height="20" Margin="260,220,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="DimGray" BorderThickness="1">
+        <Menu HorizontalAlignment="Left" Height="20" Margin="260,180,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="DimGray" BorderThickness="1">
             <MenuItem Width="33" Height="18" Header="🔎">
                 <MenuItem x:Name="RetExp_MeniItem" Header="Стаж" Click="RetirementExp_MeniItem_Click"/>
                 <MenuItem x:Name="Rank_MenuItem" Header="Звание" Click="Rank_MenuItem_Click"/>
             </MenuItem>
         </Menu>
-
->>>>>>> origin/alexus
+        <Button x:Name="Refresh_Button" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,220,0,0" Click="Window_Loaded"/>
+        <Button x:Name="Print_Button" Content="💾" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,260,0,0" Click="PrintData"/>
     </Grid>
 </Window>
