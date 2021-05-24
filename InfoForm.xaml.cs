@@ -33,14 +33,12 @@ namespace TSPP
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             TSPP.Database1DataSet EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
             TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter =
                 new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
             database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
             System.Windows.Data.CollectionViewSource employeesListViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
-            employeesListViewSource.View.MoveCurrentToFirst();
-            //database1DataSetEmployeesListTableAdapter.Adapter.SelectCommand.       
+            employeesListViewSource.View.MoveCurrentToFirst(); 
         }
 
         private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
@@ -77,7 +75,7 @@ namespace TSPP
             EditForm.Show();
         }
         private void PrintData(object sender, RoutedEventArgs e)
-        { 
+        {
             string pathDocument = AppDomain.CurrentDomain.BaseDirectory + "Отчёт.docx";
             // создаём документ
             DocX document = DocX.Create(pathDocument);
@@ -125,7 +123,6 @@ namespace TSPP
 
                 table.Rows[row].Cells[1].Paragraphs[0].Append(Convert.ToString(birth_year));
 
-<<<<<<< HEAD
                 table.Rows[row].Cells[2].Paragraphs[0].Append(Convert.ToString(was_hired_year));
 
                 table.Rows[row].Cells[3].Paragraphs[0].Append(position);
@@ -138,7 +135,11 @@ namespace TSPP
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
             document.Save();
-=======
+            System.Windows.Forms.MessageBox.Show(
+                "Отчёт успешно сгенерирован.",
+                "Успех",
+                System.Windows.Forms.MessageBoxButtons.OK);
+        }
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -147,7 +148,26 @@ namespace TSPP
         private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
->>>>>>> origin/alexus
+        }
+
+        private void DeleteEmployee_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+                System.Data.DataRowView SelectedRow = (System.Data.DataRowView)employeesListDataGrid.SelectedItem;
+                int id = (int)SelectedRow.Row.ItemArray[0];
+                SqlDataReader reader = DB.DB.GetReaderForQuery($"DELETE FROM [EmployeesList] WHERE id = {id}");
+                System.Windows.Forms.MessageBox.Show(
+                    "Пользователь удалён.",
+                    "Успех",
+                    System.Windows.Forms.MessageBoxButtons.OK);
+            } catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                   "Произошла ошибка.",
+                    "Ошибка",
+                    System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            
         }
     }
 }
