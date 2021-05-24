@@ -53,7 +53,7 @@ namespace TSPP
         {
             if (System.Windows.Forms.MessageBox.Show(
                 "Закрыть приложение?",
-                "Unoversity",
+                "University",
                 MessageBoxButtons.YesNo)
                 == System.Windows.Forms.DialogResult.No)
             {
@@ -61,12 +61,6 @@ namespace TSPP
                 return;
             }
             Environment.Exit(1);
-        }
-
-        private void ShowSearchFilter_Button_Click(object sender, RoutedEventArgs e)
-        {
-            SearchFilter searchFilter = new SearchFilter();
-            searchFilter.Show();
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
@@ -131,6 +125,7 @@ namespace TSPP
 
                 table.Rows[row].Cells[1].Paragraphs[0].Append(Convert.ToString(birth_year));
 
+<<<<<<< HEAD
                 table.Rows[row].Cells[2].Paragraphs[0].Append(Convert.ToString(was_hired_year));
 
                 table.Rows[row].Cells[3].Paragraphs[0].Append(position);
@@ -143,6 +138,16 @@ namespace TSPP
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
             document.Save();
+=======
+        private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+>>>>>>> origin/alexus
         }
     }
 }
