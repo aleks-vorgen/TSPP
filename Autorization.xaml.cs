@@ -88,7 +88,6 @@ namespace TSPP
                 this.Close();
                 infoForm.Show();
             }
-
         }
         public Autorization()
         {

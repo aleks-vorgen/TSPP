@@ -64,5 +64,21 @@ namespace TSPP
             SearchFilter searchFilter = new SearchFilter();
             searchFilter.Show();
         }
+
+        private void Edit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Database1DataSet.EmployeesListRow employeesListRow = (Database1DataSet.EmployeesListRow)employeesListDataGrid.SelectedItem;
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+               "Выберите",
+               "Неудача",
+               System.Windows.Forms.MessageBoxButtons.OK);
+            }
+        }
+
     }
 }
