@@ -47,12 +47,6 @@ namespace TSPP
 			validity[Birth_TextBox.Name] = false;
 			validity[WasHired_TextBox.Name] = false;
 			validity[Position_ComboBox.Name] = false;
-            validity[Surname_textBox.Name] = false;
-            validity[Rank_TextBox.Name] = false;
-            validity[Cathedra_textBox.Name] = false;
-            validity[Birth_TextBox.Name] = false;
-            validity[WasHired_TextBox.Name] = false;
-            validity[Position_ComboBox.Name] = false;
         }
 
 
