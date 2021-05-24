@@ -28,5 +28,6 @@
         <Button Content="-" HorizontalAlignment="Left" Margin="260,100,0,0" VerticalAlignment="Top" Width="20"/>
         <Button x:Name="EditButton" Content="✎" HorizontalAlignment="Left" Margin="260,179,0,0" VerticalAlignment="Top" Width="20" Click="Edit_Button_Click" RenderTransformOrigin="0.774,1.637"/>
         <Button x:Name="RefreshButton" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="260,221,0,0" Click="Window_Loaded"/>
+        <Button x:Name="PrintButton" Content="💾" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="260,263,0,0" Click="PrintData"/>
     </Grid>
 </Window>
