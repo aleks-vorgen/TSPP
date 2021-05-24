@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TSPP"
         mc:Ignorable="d"
-        Title="University" Height="600" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="University" Height="450" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <local:Database1DataSet x:Key="database1DataSet"/>
         <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
