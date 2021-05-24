@@ -48,7 +48,7 @@ namespace TSPP
         {
             if (System.Windows.Forms.MessageBox.Show(
                 "Закрыть приложение?",
-                "Unoversity",
+                "University",
                 MessageBoxButtons.YesNo)
                 == System.Windows.Forms.DialogResult.No)
             {
@@ -56,12 +56,6 @@ namespace TSPP
                 return;
             }
             Environment.Exit(1);
-        }
-
-        private void ShowSearchFilter_Button_Click(object sender, RoutedEventArgs e)
-        {
-            SearchFilter searchFilter = new SearchFilter();
-            searchFilter.Show();
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
@@ -78,5 +72,14 @@ namespace TSPP
             EditForm.Show();
         }
 
+        private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
