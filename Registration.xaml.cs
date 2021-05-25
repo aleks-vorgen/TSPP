@@ -113,5 +113,10 @@ namespace TSPP
         {
             return Regex.IsMatch(sstring, @"\p{IsBasicLatin}");
         }
+
+        private void LoginField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
