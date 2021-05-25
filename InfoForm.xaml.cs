@@ -133,6 +133,7 @@ namespace TSPP
                 table.Rows[row].Cells[5].Paragraphs[0].Append(Convert.ToString(retirement_exp));
 
                 table.Rows[row].Cells[6].Paragraphs[0].Append(cathedra_name);
+                row++;
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
             try
