@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 
 namespace TSPP
 {
-    /// <summary>
-    /// Interaction logic for Registration.xaml
-    /// </summary>
     public partial class Registration : Window
     {
+        private static Dictionary<string, bool> validity = new Dictionary<string, bool>(3);
         public Registration()
         {
             InitializeComponent();
+        }
+        private static void validityDictInit()
+        {
+            
         }
         static private bool IsLatin(string sstring)
         {

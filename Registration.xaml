@@ -11,6 +11,5 @@
         <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="83,198,0,0" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="ConfirmPasswordField" HorizontalAlignment="Left" Margin="83,270,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="Register" Content="Button" HorizontalAlignment="Left" Margin="83,352,0,0" VerticalAlignment="Top" Width="120"/>
-
     </Grid>
 </Window>
