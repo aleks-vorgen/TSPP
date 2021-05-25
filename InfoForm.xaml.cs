@@ -19,6 +19,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.VisualBasic;
 namespace TSPP
 {
     /// <summary>
@@ -46,14 +47,12 @@ namespace TSPP
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             TSPP.Database1DataSet EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
             TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter =
                 new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
             database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
             System.Windows.Data.CollectionViewSource employeesListViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
-            employeesListViewSource.View.MoveCurrentToFirst();
-            //database1DataSetEmployeesListTableAdapter.Adapter.SelectCommand.       
+            employeesListViewSource.View.MoveCurrentToFirst(); 
         }
 
         private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
@@ -149,22 +148,57 @@ namespace TSPP
                 table.Rows[row].Cells[6].Paragraphs[0].Append(cathedra_name);
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
-            document.Save();
-
+            try
+            {
+                document.Save();
+            } catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                "Произошла ошибка при сохранении.",
+                "Неудача",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
             System.Windows.Forms.MessageBox.Show(
                 "Отчёт успешно сгенерирован.",
                 "Успех",
                 System.Windows.Forms.MessageBoxButtons.OK);
         }
-
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            string rank = "";
+            while (rank == "" || rank == "Звание")
+            {
+                rank = Interaction.InputBox("Введите звание", "", "Звание");
+                if (rank == "" || rank == "Звание")
+                    System.Windows.Forms.MessageBox.Show(
+                "Ошибка ввода",
+                "Некорректный ввод",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            
+        }
+        private void DeleteEmployee_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+                System.Data.DataRowView SelectedRow = (System.Data.DataRowView)employeesListDataGrid.SelectedItem;
+                int id = (int)SelectedRow.Row.ItemArray[0];
+                SqlDataReader reader = DB.DB.GetReaderForQuery($"DELETE FROM [EmployeesList] WHERE id = {id}");
+                System.Windows.Forms.MessageBox.Show(
+                    "Пользователь удалён.",
+                    "Успех",
+                    System.Windows.Forms.MessageBoxButtons.OK);
+            } catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                   "Произошла ошибка.",
+                    "Ошибка",
+                    System.Windows.Forms.MessageBoxButtons.OK);
+            }
         }
     }
 }

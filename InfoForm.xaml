@@ -11,7 +11,7 @@
         <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource employeesListViewSource}">
-        <DataGrid x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" Width="840" Height="380" Margin="0,20,20,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <DataGrid  x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" Width="840" Height="380" Margin="0,20,20,0" VerticalAlignment="Top" HorizontalAlignment="Right">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="*"/>
                 <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="Год рождения" Width="*"/>
