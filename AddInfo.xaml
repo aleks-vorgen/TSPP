@@ -42,7 +42,5 @@
                 </TransformGroup>
             </GridSplitter.RenderTransform>
         </GridSplitter>
-
-
     </Grid>
 </Window>

@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="constr" IsAppSettingsProperty="true" Modifier="Assembly" Name="constr (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TSPP.Properties.Settings.GlobalReference.Default.constr" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="constr" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="constr (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TSPP.Properties.Settings.GlobalReference.Default.constr" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeesListTableAdapter" GeneratorDataComponentClassName="EmployeesListTableAdapter" Name="EmployeesList" UserDataComponentName="EmployeesListTableAdapter">
@@ -149,7 +149,7 @@ SELECT Id, username, password, is_worker FROM UserList WHERE (Id = @Id)</Command
   <xs:element name="Database1DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="Database1DataSet" msprop:Generator_UserDSName="Database1DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EmployeesList" msprop:Generator_TableClassName="EmployeesListDataTable" msprop:Generator_TableVarName="tableEmployeesList" msprop:Generator_TablePropName="EmployeesList" msprop:Generator_RowDeletingName="EmployeesListRowDeleting" msprop:Generator_RowChangingName="EmployeesListRowChanging" msprop:Generator_RowEvHandlerName="EmployeesListRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeesListRowDeleted" msprop:Generator_UserTableName="EmployeesList" msprop:Generator_RowChangedName="EmployeesListRowChanged" msprop:Generator_RowEvArgName="EmployeesListRowChangeEvent" msprop:Generator_RowClassName="EmployeesListRow">
+        <xs:element name="EmployeesList" msprop:Generator_TableClassName="EmployeesListDataTable" msprop:Generator_TableVarName="tableEmployeesList" msprop:Generator_RowChangedName="EmployeesListRowChanged" msprop:Generator_TablePropName="EmployeesList" msprop:Generator_RowDeletingName="EmployeesListRowDeleting" msprop:Generator_RowChangingName="EmployeesListRowChanging" msprop:Generator_RowEvHandlerName="EmployeesListRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeesListRowDeleted" msprop:Generator_RowClassName="EmployeesListRow" msprop:Generator_UserTableName="EmployeesList" msprop:Generator_RowEvArgName="EmployeesListRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -193,7 +193,7 @@ SELECT Id, username, password, is_worker FROM UserList WHERE (Id = @Id)</Command
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="UserList" msprop:Generator_TableClassName="UserListDataTable" msprop:Generator_TableVarName="tableUserList" msprop:Generator_TablePropName="UserList" msprop:Generator_RowDeletingName="UserListRowDeleting" msprop:Generator_RowChangingName="UserListRowChanging" msprop:Generator_RowEvHandlerName="UserListRowChangeEventHandler" msprop:Generator_RowDeletedName="UserListRowDeleted" msprop:Generator_UserTableName="UserList" msprop:Generator_RowChangedName="UserListRowChanged" msprop:Generator_RowEvArgName="UserListRowChangeEvent" msprop:Generator_RowClassName="UserListRow">
+        <xs:element name="UserList" msprop:Generator_TableClassName="UserListDataTable" msprop:Generator_TableVarName="tableUserList" msprop:Generator_RowChangedName="UserListRowChanged" msprop:Generator_TablePropName="UserList" msprop:Generator_RowDeletingName="UserListRowDeleting" msprop:Generator_RowChangingName="UserListRowChanging" msprop:Generator_RowEvHandlerName="UserListRowChangeEventHandler" msprop:Generator_RowDeletedName="UserListRowDeleted" msprop:Generator_RowClassName="UserListRow" msprop:Generator_UserTableName="UserList" msprop:Generator_RowEvArgName="UserListRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />

@@ -22,6 +22,26 @@ namespace TSPP
     /// </summary>
     public partial class Autorization : Window
     {
+        private bool GetIsAdmin(string username)
+        {
+            string query = $"SELECT is_worker FROM [UserList] WHERE [username] = '{username}'";
+            try
+            {
+                bool is_admin = false;
+                SqlDataReader reader = TSPP.DB.DB.GetReaderForQuery(query);
+                while (reader.Read())
+                {
+                    is_admin = reader.GetBoolean(0);
+                }
+                return is_admin;
+            }
+            catch (Exception)
+            {
+                AlertBox.Content = "Произошла непредвиденная ошибка";
+                AlertBox.Visibility = System.Windows.Visibility.Visible;
+                return false;
+            }
+        }
         private string GetPassword(string username)
         {
             bool was_username_found = false;
@@ -84,7 +104,8 @@ namespace TSPP
             }
             else
             {
-                InfoForm infoForm = new InfoForm();
+                bool is_worker = GetIsAdmin(username);
+                InfoForm infoForm = new InfoForm(is_worker);
                 this.Close();
                 infoForm.Show();
             }

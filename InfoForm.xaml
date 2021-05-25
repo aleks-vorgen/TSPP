@@ -8,7 +8,7 @@
         Title="University" Height="450" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing" Icon="Resources/SSU_minimized.png">
     <Window.Resources>
         <local:Database1DataSet x:Key="database1DataSet"/>
-        <CollectionViewSource x:Key="employeesListViewSource" Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
+        <CollectionViewSource x:Key="employeesListViewSource"  Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource employeesListViewSource}">
         <DataGrid  x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" Width="840" Height="380" Margin="0,20,20,0" VerticalAlignment="Top" HorizontalAlignment="Right">
@@ -16,8 +16,8 @@
                 <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="*"/>
                 <DataGridTextColumn x:Name="birth_yearColumn" Binding="{Binding birth_year}" Header="Год рождения" Width="*"/>
                 <DataGridTextColumn x:Name="was_hired_yearColumn" Binding="{Binding was_hired_year}" Header="Нанят" Width="*"/>
-                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="Звание" Width="*"/>
-                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="Должность" Width="*"/>
+                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding position}" Header="Должность" Width="*"/>
+                <DataGridTextColumn x:Name="rankColumn" Binding="{Binding rank}" Header="Звание" Width="*"/>
                 <DataGridTextColumn x:Name="retirement_expColumn" Binding="{Binding retirement_exp}" Header="Пенсионный стаж" Width="*"/>
                 <DataGridTextColumn x:Name="cathedra_nameColumn" Binding="{Binding cathedra_name}" Header="Кафедра" Width="*"/>
             </DataGrid.Columns>
@@ -32,7 +32,8 @@
                 <MenuItem x:Name="Rank_MenuItem" Header="Звание" Click="Rank_MenuItem_Click"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="Refresh_Button" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,220,0,0" Click="Window_Loaded"/>
+        <Button x:Name="Refresh_Button" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,220,0,0" Click="RefreshClick"/>
         <Button x:Name="Print_Button" Content="💾" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,260,0,0" Click="PrintData"/>
+        <Button x:Name="LogOut_Button" Content="Выйти" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="80" Height="40" FontSize="14" Click="LogOut_Button_Click"/>
     </Grid>
 </Window>
