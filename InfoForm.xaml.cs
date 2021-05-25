@@ -27,9 +27,15 @@ namespace TSPP
     /// </summary>
     public partial class InfoForm : Window
     {
-        public InfoForm()
+        public InfoForm(bool is_admin)
         {
             InitializeComponent();
+            if (!is_admin)
+            {
+                ShowEmployeeForm_Button.IsEnabled = false;
+                DeleteEmployee_Button.IsEnabled = false;
+                Edit_Button.IsEnabled = false;
+            }
         }
         private static TSPP.Database1DataSet EmployeeListDataSet;
         private static System.Windows.Data.CollectionViewSource viewSource;
@@ -86,9 +92,9 @@ namespace TSPP
                 addition = "WHERE [retirement_exp] > 50";
             if (rank_filter_on)
                 if (with_rank)
-                    addition = $"WHERE [rank] LIKE '%{position_global}%'";
+                    addition = $"WHERE [rank] LIKE '{position_global}'";
                 else
-                    addition = $"WHERE [rank] NOT LIKE '%{position_global}%'";
+                    addition = $"WHERE [rank] NOT LIKE '{position_global}'";
             string query = "SELECT * FROM [EmployeesList]" + addition + ";";
             int size = 0;
             SqlDataReader reader = DB.DB.GetReaderForQuery("SELECT count(*) FROM [EmployeesList] " + addition + ";");
@@ -208,10 +214,10 @@ namespace TSPP
             }
             if (with_rank)
             {
-                (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] LIKE '%{position_global}%'";
+                (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] LIKE '{position_global}'";
                 return;
             }
-            (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] NOT LIKE '%{position_global}%'";
+            (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] NOT LIKE '{position_global}'";
             rank_filter_on = true;
         }
         private void DeleteEmployee_Button_Click(object sender, RoutedEventArgs e)
