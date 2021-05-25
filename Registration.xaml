@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="Registration" Height="450" Width="300">
     <Grid>
-        <TextBox x:Name="LoginField" HorizontalAlignment="Left" Height="23" Margin="83,118,0,0" TextWrapping="Wrap" Text="Придумайте логин" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="lox" HorizontalAlignment="Left" Height="23" Margin="83,118,0,0" TextWrapping="Wrap" Text="Придумайте логин" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="83,198,0,0" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="ConfirmPasswordField" HorizontalAlignment="Left" Margin="83,270,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Register" Content="Button" HorizontalAlignment="Left" Margin="83,352,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RegisterButton" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="83,352,0,0" VerticalAlignment="Top" Width="120"/>
         <CheckBox x:Name="IsAdminCheck" Content="Права администратора" HorizontalAlignment="Left" Margin="69,47,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

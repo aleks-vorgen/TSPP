@@ -24,16 +24,17 @@ namespace TSPP
             InitializeComponent();
             can_create_admins = _can_create_admins;
             if (!can_create_admins)
-
+                IsAdminCheck.IsEnabled = false;
         }
         private static void validityDictInit()
         {
-            validity[LoginField.Name] = false;
+            validity[LoginField] = false;
             validity[PasswordField.Name] = false;
             validity[ConfirmPasswordField.Name] = false;
         }
         private static void ValidateUsername(object sender, RoutedEventArgs e)
         {
+            
             TextBox box = sender as TextBox;
             if (!IsLatin(box.Text))
             {
