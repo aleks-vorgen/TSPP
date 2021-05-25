@@ -10,7 +10,7 @@
         <local:Database1DataSet x:Key="database1DataSet"/>
         <CollectionViewSource x:Key="employeesListViewSource"  Source="{Binding EmployeesList, Source={StaticResource database1DataSet}}"/>
     </Window.Resources>
-    <Grid x:Name="grid" DataContext="{StaticResource employeesListViewSource}">
+    <Grid DataContext="{StaticResource employeesListViewSource}">
         <DataGrid  x:Name="employeesListDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" Width="840" Height="380" Margin="0,20,20,0" VerticalAlignment="Top" HorizontalAlignment="Right">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding surname}" Header="Фамилия" Width="*"/>
@@ -24,7 +24,7 @@
         </DataGrid>
         <Image Source="Resources/SSU.png" HorizontalAlignment="Left" Height="380" Width="300" Margin="20,20,0,0" VerticalAlignment="Top" Opacity="0.7"/>
         <Button x:Name="ShowEmployeeForm_Button" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,60,0,0" Click="ShowEmployeeForm_Button_Click"/>
-        <Button x:Name="DeleteEmployee_Button" Content="-" HorizontalAlignment="Left" Margin="260,100,0,0" VerticalAlignment="Top" Width="35" Click="DeleteEmployee_Button_Click"/>
+        <Button x:Name="DeleteEmployee_Button" Content="-" HorizontalAlignment="Left" Margin="260,100,0,0" VerticalAlignment="Top" Width="35"/>
         <Button x:Name="Edit_Button" Content="✎" HorizontalAlignment="Left" Margin="260,140,0,0" VerticalAlignment="Top" Width="35" Click="Edit_Button_Click" RenderTransformOrigin="0.774,1.637"/>
         <Menu HorizontalAlignment="Left" Height="20" Margin="260,180,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="DimGray" BorderThickness="1">
             <MenuItem Width="33" Height="18" Header="🔎">

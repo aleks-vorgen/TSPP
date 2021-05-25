@@ -35,8 +35,9 @@ namespace TSPP
                 ShowEmployeeForm_Button.IsEnabled = false;
                 DeleteEmployee_Button.IsEnabled = false;
                 Edit_Button.IsEnabled = false;
-            }
+            } 
         }
+
         private static TSPP.Database1DataSet EmployeeListDataSet;
         private static System.Windows.Data.CollectionViewSource viewSource;
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -168,6 +169,7 @@ namespace TSPP
                 "Успех",
                 System.Windows.Forms.MessageBoxButtons.OK);
         }
+
         private static bool ret_exp_filter_on = false;
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
