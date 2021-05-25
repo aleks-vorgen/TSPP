@@ -19,6 +19,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.VisualBasic;
 namespace TSPP
 {
     /// <summary>
@@ -134,7 +135,16 @@ namespace TSPP
                 table.Rows[row].Cells[6].Paragraphs[0].Append(cathedra_name);
             }
             document.InsertParagraph().InsertTableAfterSelf(table);
-            document.Save();
+            try
+            {
+                document.Save();
+            } catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                "Произошла ошибка при сохранении.",
+                "Неудача",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
             System.Windows.Forms.MessageBox.Show(
                 "Отчёт успешно сгенерирован.",
                 "Успех",
@@ -142,12 +152,22 @@ namespace TSPP
         }
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            string rank = "";
+            while (rank == "" || rank == "Звание")
+            {
+                rank = Interaction.InputBox("Введите звание", "", "Звание");
+                if (rank == "" || rank == "Звание")
+                    System.Windows.Forms.MessageBox.Show(
+                "Ошибка ввода",
+                "Некорректный ввод",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            
         }
 
         private void DeleteEmployee_Button_Click(object sender, RoutedEventArgs e)
