@@ -31,15 +31,16 @@ namespace TSPP
         {
             InitializeComponent();
         }
-
+        private static TSPP.Database1DataSet EmployeeListDataSet;
+        private static System.Windows.Data.CollectionViewSource viewSource;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            TSPP.Database1DataSet EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
+            EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
             TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter =
                 new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
             database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
-            System.Windows.Data.CollectionViewSource employeesListViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
-            employeesListViewSource.View.MoveCurrentToFirst(); 
+            viewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
+            viewSource.View.MoveCurrentToFirst();
         }
 
         private void ShowEmployeeForm_Button_Click(object sender, RoutedEventArgs e)
@@ -80,10 +81,20 @@ namespace TSPP
             string pathDocument = AppDomain.CurrentDomain.BaseDirectory + "Отчёт.docx";
             // создаём документ
             DocX document = DocX.Create(pathDocument);
+            string addition = "";
+            if (ret_exp_filter_on)
+                addition = "WHERE [retirement_exp] > 50";
+            if (rank_filter_on)
+                if (with_rank)
+                    addition = $"WHERE [rank] LIKE '%{position_global}%'";
+                else
+                    addition = $"WHERE [rank] NOT LIKE '%{position_global}%'";
+            string query = "SELECT * FROM [EmployeesList]" + addition + ";";
             int size = 0;
-            SqlDataReader reader = DB.DB.GetReaderForQuery("SELECT count(*) FROM [EmployeesList];");
+            SqlDataReader reader = DB.DB.GetReaderForQuery("SELECT count(*) FROM [EmployeesList] " + addition + ";");
             while (reader.Read())
                 size = reader.GetInt32(0);
+
             Xceed.Document.NET.Table table = document.AddTable(size + 1, 7);
             // располагаем таблицу по центру
             table.Alignment = Alignment.center;
@@ -98,8 +109,7 @@ namespace TSPP
             table.Rows[0].Cells[4].Paragraphs[0].Append("Должность").FontSize(18);
             table.Rows[0].Cells[5].Paragraphs[0].Append("Пенсионный стаж").FontSize(18);
             table.Rows[0].Cells[6].Paragraphs[0].Append("Кафедра").FontSize(18);
-
-            SqlDataReader reader2 = DB.DB.GetReaderForQuery("SELECT * FROM [EmployeesList];");
+            SqlDataReader reader2 = DB.DB.GetReaderForQuery(query);
             int id;
             string surname;
             uint birth_year;
@@ -139,7 +149,8 @@ namespace TSPP
             try
             {
                 document.Save();
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 System.Windows.Forms.MessageBox.Show(
                 "Произошла ошибка при сохранении.",
@@ -151,29 +162,62 @@ namespace TSPP
                 "Успех",
                 System.Windows.Forms.MessageBoxButtons.OK);
         }
+        private static bool ret_exp_filter_on = false;
         private void RetirementExp_MeniItem_Click(object sender, RoutedEventArgs e)
         {
-            
+            rank_filter_on = false;
+            if (System.Windows.Forms.MessageBox.Show(
+                "Будут отфильтрованы все сотрудники со стажем роботы больше 50 лет",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                (viewSource.Source as DataTable).DefaultView.RowFilter = $"[retirement_exp] > 50";
+                ret_exp_filter_on = true;
+            }
         }
-
+        private static bool rank_filter_on = false, with_rank;
+        private static string position_global;
         private void Rank_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string rank = "";
-            while (rank == "" || rank == "Звание")
+            ret_exp_filter_on = false;
+            position_global = Interaction.InputBox("Введите звание", "", "Звание");
+            if (position_global == "" || position_global == "Звание")
             {
-                rank = Interaction.InputBox("Введите звание", "", "Звание");
-                if (rank == "" || rank == "Звание")
-                    System.Windows.Forms.MessageBox.Show(
+                System.Windows.Forms.MessageBox.Show(
                 "Ошибка ввода",
                 "Некорректный ввод",
                 System.Windows.Forms.MessageBoxButtons.OK);
+                return;
             }
-            
+            string ans = "";
+            ans = Interaction.InputBox($"Хотите отфильтровать записи сотрудников, имеющих звание {position_global}" +
+                $" (+ - со званием, - - наоборот", "", "+ или -");
+            if (ans == "+")
+            {
+                with_rank = true;
+            }
+            else if (ans == "-")
+                with_rank = false;
+            else
+            {
+                System.Windows.Forms.MessageBox.Show(
+            "Ошибка ввода",
+            "Некорректный ввод",
+            System.Windows.Forms.MessageBoxButtons.OK);
+                return;
+            }
+            if (with_rank)
+            {
+                (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] LIKE '%{position_global}%'";
+                return;
+            }
+            (viewSource.Source as DataTable).DefaultView.RowFilter = $"[rank] NOT LIKE '%{position_global}%'";
+            rank_filter_on = true;
         }
-
         private void DeleteEmployee_Button_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 System.Data.DataRowView SelectedRow = (System.Data.DataRowView)employeesListDataGrid.SelectedItem;
                 int id = (int)SelectedRow.Row.ItemArray[0];
                 SqlDataReader reader = DB.DB.GetReaderForQuery($"DELETE FROM [EmployeesList] WHERE id = {id}");
@@ -181,13 +225,27 @@ namespace TSPP
                     "Пользователь удалён.",
                     "Успех",
                     System.Windows.Forms.MessageBoxButtons.OK);
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 System.Windows.Forms.MessageBox.Show(
                    "Произошла ошибка.",
                     "Ошибка",
                     System.Windows.Forms.MessageBoxButtons.OK);
             }
+        }
+
+        private void RefreshClick(object sender, RoutedEventArgs e)
+        {
+            ret_exp_filter_on = false;
+            rank_filter_on = false;
+            (viewSource.Source as DataTable).DefaultView.RowFilter = "";
+            EmployeeListDataSet = ((TSPP.Database1DataSet)(this.FindResource("database1DataSet")));
+            TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter database1DataSetEmployeesListTableAdapter =
+                new TSPP.Database1DataSetTableAdapters.EmployeesListTableAdapter();
+            database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
+            viewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
+            viewSource.View.MoveCurrentToFirst();
         }
     }
 }

@@ -54,6 +54,17 @@ namespace TSPP
                 validity[box.Name] = false;
                 return;
             }
+            if (box.Text.Length > 13)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                "Превышена длинна ввода",
+                "Неудача",
+                System.Windows.Forms.MessageBoxButtons.OK);
+                box.Text = "";
+                box.BorderBrush = Brushes.Red;
+                validity[box.Name] = false;
+                return;
+            }
             validity[box.Name] = true;
             box.BorderBrush = Brushes.Gray;
         }
