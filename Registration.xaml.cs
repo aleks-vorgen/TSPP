@@ -25,6 +25,8 @@ namespace TSPP
             can_create_admins = _can_create_admins;
             if (!can_create_admins)
                 IsAdminCheck.IsEnabled = false;
+            else
+                this.Title = "Adding user";
         }
         private void validityDictInit()
         {
@@ -34,7 +36,6 @@ namespace TSPP
         }
         private static void ValidateUsername(object sender, RoutedEventArgs e)
         {
-            
             TextBox box = sender as TextBox;
             if (!IsLatin(box.Text))
             {
@@ -91,16 +92,26 @@ namespace TSPP
                 PasswordField.BorderBrush = ConfirmPasswordField.BorderBrush = Brushes.Red;
                 return;
             }
-
+            try
+            {
+                TSPP.DB.DB.AddUser(LoginField.Text.Trim(), PasswordField.Password.Trim(), (bool)(can_create_admins ? IsAdminCheck.IsChecked : false));
+                System.Windows.Forms.MessageBox.Show(
+                 "Вы успешно зарегистрировались",
+                 "",
+                 System.Windows.Forms.MessageBoxButtons.OK);
+                Autorization autorization = new Autorization();
+                autorization.Show();
+            } catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                 "При регистрации произошла непредвиденная ошибка",
+                 "",
+                 System.Windows.Forms.MessageBoxButtons.OK);
+            }
         }
         static private bool IsLatin(string sstring)
         {
             return Regex.IsMatch(sstring, @"\p{IsBasicLatin}");
-        }
-
-        private void IsAdminCheck_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

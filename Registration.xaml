@@ -8,9 +8,9 @@
         Title="Registration" Height="352" Width="300" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Resources/SSU_minimized.png">
     <Grid>
         <Image Source="Resources/SSU_minimized.png" HorizontalAlignment="Left" Height="303" Width="274" VerticalAlignment="Top" Opacity="0.4" Margin="10,10,0,0"/>
-        <TextBox x:Name="LoginField" Height="20" Margin="87,80,87,0" TextWrapping="Wrap" Text="Придумайте логин" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="PasswordField" Margin="87,120,87,0" VerticalAlignment="Top" Width="120" Height="20"/>
-        <PasswordBox x:Name="ConfirmPasswordField" Margin="87,160,87,0" VerticalAlignment="Top" Width="120" Height="20"/>
+            <TextBox x:Name="LoginField" Height="20" Margin="87,80,87,0" TextWrapping="Wrap" Text="Придумайте логин" VerticalAlignment="Top" Width="120" TextChanged="ValidateUsername" LostFocus="ValidateUsername"/>
+            <PasswordBox x:Name="PasswordField" Margin="87,120,87,0" VerticalAlignment="Top" Width="120" Height="20" TextInput="ValidatePassword" LostFocus="ValidateUsername"/>
+            <PasswordBox x:Name="ConfirmPasswordField" Margin="87,160,87,0" VerticalAlignment="Top" Width="120" Height="20" TextInput="ValidatePassword" LostFocus="ValidateUsername"/>
         <Button x:Name="RegisterButton" Content="Зарегистрировать" Margin="86,260,86,0" VerticalAlignment="Top" Width="120"/>
         <CheckBox x:Name="IsAdminCheck" Content="Администратор" Margin="87,200,87,0" VerticalAlignment="Top" Height="20"/>
     </Grid>

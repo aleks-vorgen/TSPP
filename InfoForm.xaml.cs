@@ -36,6 +36,7 @@ namespace TSPP
                 ShowEmployeeForm_Button.IsEnabled = false;
                 DeleteEmployee_Button.IsEnabled = false;
                 Edit_Button.IsEnabled = false;
+                AddUserButton.IsEnabled = false;
             } 
         }
 
@@ -262,6 +263,11 @@ namespace TSPP
             database1DataSetEmployeesListTableAdapter.Fill(EmployeeListDataSet.EmployeesList);
             viewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("employeesListViewSource")));
             viewSource.View.MoveCurrentToFirst();
+        }
+        private void AddUser(object sender, RoutedEventArgs e)
+        {
+            Registration registration = new Registration(true); //can register as admin
+            registration.Show();
         }
     }
 }
