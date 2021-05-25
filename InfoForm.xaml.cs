@@ -26,9 +26,22 @@ namespace TSPP
     /// </summary>
     public partial class InfoForm : Window
     {
+
+        private static bool isAdmin = false;
         public InfoForm()
         {
             InitializeComponent();
+            IsAdminLogIn();
+        }
+
+        private void IsAdminLogIn()
+        {
+            if(!isAdmin)
+            {
+                ShowEmployeeForm_Button.Visibility = Visibility.Hidden;
+                Edit_Button.Visibility = Visibility.Hidden;
+                DeleteEmployee_Button.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
