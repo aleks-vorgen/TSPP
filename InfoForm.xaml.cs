@@ -188,7 +188,6 @@ namespace TSPP
                     "Ошибка",
                     System.Windows.Forms.MessageBoxButtons.OK);
             }
-            
         }
     }
 }
