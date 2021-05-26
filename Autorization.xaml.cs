@@ -141,6 +141,7 @@ namespace TSPP
         {
             Registration registration = new Registration(false);
             registration.Show();
+            this.Close();
         }
     }
 }

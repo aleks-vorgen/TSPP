@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TSPP"
         mc:Ignorable="d"
-        Title="Registration" Height="352" Width="300" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Resources/SSU_minimized.png">
+        Title="Registration" Height="352" Width="308" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Resources/SSU_minimized.png">
     <Grid>
         <Image Source="Resources/SSU_minimized.png" HorizontalAlignment="Left" Height="303" Width="274" VerticalAlignment="Top" Opacity="0.4" Margin="10,10,0,0"/>
-            <TextBox x:Name="LoginField" Height="20" Margin="87,80,87,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="LoginField_TextChanged" LostFocus="LoginField_LostFocus"/>
-        <PasswordBox x:Name="PasswordField" Margin="87,120,87,0" VerticalAlignment="Top" Width="120" Height="20" TextInput="PasswordField_TextInput" LostFocus="PasswordField_LostFocus"/>
-        <PasswordBox x:Name="ConfirmPasswordField" Margin="87,160,87,0" VerticalAlignment="Top" Width="120" Height="20" TextInput="PasswordField_TextInput" LostFocus="PasswordField_LostFocus" PreviewKeyDown="ConfirmPasswordField_PreviewKeyDown"/>
-        <Button x:Name="RegisterButton" Content="Зарегистрировать" Margin="86,260,86,0" VerticalAlignment="Top" Width="120" Click="Register"/>
+        <TextBox x:Name="LoginField" Height="20" Margin="91,80,87,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="LoginField_TextChanged" LostFocus="LoginField_LostFocus"/>
+        <PasswordBox x:Name="PasswordField" Margin="91,120,87,0" VerticalAlignment="Top" Height="20" TextInput="PasswordField_TextInput" LostFocus="PasswordField_LostFocus"/>
+        <PasswordBox x:Name="ConfirmPasswordField" Margin="91,160,87,0" VerticalAlignment="Top" Height="20" TextInput="PasswordField_TextInput" LostFocus="PasswordField_LostFocus" PreviewKeyDown="ConfirmPasswordField_PreviewKeyDown"/>
+        <Button x:Name="RegisterButton" Content="Зарегистрировать" Margin="91,260,87,0" VerticalAlignment="Top" Click="Register"/>
         <CheckBox x:Name="IsAdminCheck" Content="Администратор" Margin="87,200,87,0" VerticalAlignment="Top" Height="20"/>
         <Label Content="Придумайте логин" HorizontalAlignment="Left" Margin="87,49,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Введите пароль" HorizontalAlignment="Left" Margin="87,94,0,0" VerticalAlignment="Top" Width="120"/>

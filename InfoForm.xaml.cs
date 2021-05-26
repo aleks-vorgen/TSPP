@@ -33,10 +33,10 @@ namespace TSPP
             InitializeComponent();
             if (!is_admin)
             {
-                ShowEmployeeForm_Button.IsEnabled = false;
-                DeleteEmployee_Button.IsEnabled = false;
-                Edit_Button.IsEnabled = false;
-                AddUserButton.IsEnabled = false;
+                ShowEmployeeForm_Button.Visibility = Visibility.Hidden;
+                DeleteEmployee_Button.Visibility = Visibility.Hidden;
+                Edit_Button.Visibility = Visibility.Hidden;
+                AddUserButton.Visibility = Visibility.Hidden;
             } 
         }
 

@@ -63,9 +63,9 @@ namespace TSPP
                      "Вы успешно зарегистрировались",
                      "",
                      System.Windows.Forms.MessageBoxButtons.OK);
-                this.Close();
                     Autorization autorization = new Autorization();
                     autorization.Show();
+                    this.Close();
                 }
                 else
                 {
