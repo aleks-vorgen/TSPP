@@ -137,5 +137,10 @@ namespace TSPP
                 AuthenticateUser(LogInField.Text.Trim(), PasswordField.Password.Trim());
             }
         }
+        private void Register(object sender, RoutedEventArgs e)
+        {
+            Registration registration = new Registration(false);
+            registration.Show();
+        }
     }
 }

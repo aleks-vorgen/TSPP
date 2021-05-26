@@ -53,14 +53,35 @@ namespace TSPP.DB
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
-
-        public static void AddUser(string username, string password, bool is_worker)
+        public static bool CheckIfUserExists(string username)
         {
+            SqlDataReader reader = GetReaderForQuery($"SELECT username FROM [UserList] WHERE [username] = '{username}';");
+            bool if_already_exists = false;
+            while (reader.Read())
+            {
+                try
+                {
+                    string usrnm = reader.GetString(0);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                if_already_exists = true;
+            }
+            return if_already_exists;
+        }
+
+        public static bool AddUser(string username, string password, bool is_worker)
+        {
+            if (CheckIfUserExists(username))
+                return false;
             SqlConnection connection = Connect();
-            string query = "INSERT INTO [UserList] ([username], [password], [is_worker]"
-                + $" VALUES ({username}, {password},{is_worker}";
+            string query = "INSERT INTO [UserList] ([username], [password], [is_worker])"
+                + $" VALUES ('{username}', '{password}', {(is_worker ? 1 : 0)});";
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
+            return true;
         }
     }
 }

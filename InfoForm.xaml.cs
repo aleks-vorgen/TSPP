@@ -60,6 +60,11 @@ namespace TSPP
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (log_out)
+            {
+                e.Cancel = false;
+                return;
+            }
             if (System.Windows.Forms.MessageBox.Show(
                 "Закрыть приложение?",
                 "University",
@@ -244,9 +249,10 @@ namespace TSPP
                     System.Windows.Forms.MessageBoxButtons.OK);
             }
         }
-
+        private static bool log_out = false;
         private void LogOut_Button_Click(object sender, RoutedEventArgs e)
         {
+            log_out = true;
             Autorization autorization_form = new Autorization();
             autorization_form.Show();
             this.Close();

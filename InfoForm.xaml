@@ -34,10 +34,7 @@
         </Menu>
         <Button x:Name="Refresh_Button" Content="🗘" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,220,0,0" Click="RefreshClick"/>
         <Button x:Name="Print_Button" Content="💾" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="260,260,0,0" Click="PrintData"/>
-<<<<<<< HEAD
         <Button x:Name="LogOut_Button" Content="Выйти" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="80" Height="40" FontSize="14" Click="LogOut_Button_Click"/>
-=======
         <Button x:Name="AddUserButton" Content="Добавить пользователя" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="159,310,0,0" Click="AddUser"/>
->>>>>>> origin/pog
     </Grid>
 </Window>

@@ -27,6 +27,7 @@ namespace TSPP
                 IsAdminCheck.IsEnabled = false;
             else
                 this.Title = "Adding user";
+            validityDictInit();
         }
         private void validityDictInit()
         {
@@ -34,47 +35,9 @@ namespace TSPP
             validity[PasswordField.Name] = false;
             validity[ConfirmPasswordField.Name] = false;
         }
-        private static void ValidateUsername(object sender, RoutedEventArgs e)
-        {
-            TextBox box = sender as TextBox;
-            if (!IsLatin(box.Text))
-            {
-                validity[box.Name] = false;
-                box.BorderBrush = Brushes.Red;
-            }
-            if (box.Text.Length > 8)
-            {
-                validity[box.Name] = false;
-                box.BorderBrush = Brushes.Red;
-                System.Windows.Forms.MessageBox.Show(
-                "Логин должен быть до 8 символов включительно",
-                "",
-                System.Windows.Forms.MessageBoxButtons.OK);
-            }
-            box.BorderBrush = Brushes.Gray;
-            validity[box.Name] = true;
-        }
-        private static void ValidatePassword(object sender, RoutedEventArgs e)
-        {
-            PasswordBox box = sender as PasswordBox;
-            if (!IsLatin(box.Password))
-            {
-                validity[box.Name] = false;
-                box.BorderBrush = Brushes.Red;
-            }
-            if (box.Password.Length > 8)
-            {
-                validity[box.Name] = false;
-                box.BorderBrush = Brushes.Red;
-                System.Windows.Forms.MessageBox.Show(
-                "Пароль должен быть до 8 символов включительно",
-                "",
-                System.Windows.Forms.MessageBoxButtons.OK);
-            }
-        }
         private void Register(object sender, RoutedEventArgs e)
-        { 
-            foreach(bool value in validity.Values)
+        {
+            foreach (bool value in validity.Values)
                 if (!value)
                 {
                     System.Windows.Forms.MessageBox.Show(
@@ -94,14 +57,26 @@ namespace TSPP
             }
             try
             {
-                TSPP.DB.DB.AddUser(LoginField.Text.Trim(), PasswordField.Password.Trim(), (bool)(can_create_admins ? IsAdminCheck.IsChecked : false));
-                System.Windows.Forms.MessageBox.Show(
-                 "Вы успешно зарегистрировались",
-                 "",
-                 System.Windows.Forms.MessageBoxButtons.OK);
-                Autorization autorization = new Autorization();
-                autorization.Show();
-            } catch (Exception)
+                if (TSPP.DB.DB.AddUser(LoginField.Text.Trim(), PasswordField.Password.Trim(), (bool)(can_create_admins ? IsAdminCheck.IsChecked : false)))
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                     "Вы успешно зарегистрировались",
+                     "",
+                     System.Windows.Forms.MessageBoxButtons.OK);
+                this.Close();
+                    Autorization autorization = new Autorization();
+                    autorization.Show();
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                     "Имя пользователя занято",
+                     "",
+                     System.Windows.Forms.MessageBoxButtons.OK);
+                    return;
+                }
+            }
+            catch (Exception)
             {
                 System.Windows.Forms.MessageBox.Show(
                  "При регистрации произошла непредвиденная ошибка",
@@ -113,5 +88,120 @@ namespace TSPP
         {
             return Regex.IsMatch(sstring, @"\p{IsBasicLatin}");
         }
+
+        private void PasswordField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox box = sender as PasswordBox;
+            if (!IsLatin(box.Password) && box.Password.Length != 0)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Используйте только символы латинского алфавита",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            if (box.Password.Length > 8)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Пароль должен быть до 8 символов включительно",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            validity[box.Name] = true;
+            box.BorderBrush = Brushes.Gray;
+        }
+
+        private void LoginField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (!IsLatin(box.Text) && box.Text.Length != 0)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Используйте только символы латинского алфавита",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            if (box.Text.Length > 8)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Логин должен быть до 8 символов включительно",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            box.BorderBrush = Brushes.Gray;
+            validity[box.Name] = true;
+        }
+
+        private void LoginField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (!IsLatin(box.Text) && box.Text.Length != 0)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Используйте только символы латинского алфавита",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            if (box.Text.Length > 8)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Логин должен быть до 8 символов включительно",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            box.BorderBrush = Brushes.Gray;
+            validity[box.Name] = true;
+        }
+
+        private void PasswordField_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            PasswordBox box = sender as PasswordBox;
+            if (!IsLatin(box.Password) && box.Password.Length != 0)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Используйте только символы латинского алфавита",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            if (box.Password.Length > 8)
+            {
+                validity[box.Name] = false;
+                box.BorderBrush = Brushes.Red;
+                System.Windows.Forms.MessageBox.Show(
+                "Пароль должен быть до 8 символов включительно",
+                "",
+                System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            validity[box.Name] = true;
+            box.BorderBrush = Brushes.Gray;
+        }
+
+
+        private void ConfirmPasswordField_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            RoutedEventArgs eee = new RoutedEventArgs();
+            PasswordField_LostFocus(ConfirmPasswordField, eee);
+            PasswordBox box = (PasswordBox)sender;
+            box.BorderBrush = Brushes.Gray;
+            if (e.Key == Key.Enter)
+            {
+                RoutedEventArgs ee = new RoutedEventArgs();
+                Register(box, ee);
+            }
+        }
     }
+
 }
